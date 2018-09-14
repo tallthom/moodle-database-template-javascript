@@ -2,7 +2,8 @@
 // Name: assignmentName
 // Description: This script formats the assignment name at the top of both
 // the list view and the single view. It differs if the list is singular
-// or plural. The assignment name is set in a "div" tag
+// or plural. The name is pulled from the Database Activity name set by
+// the user in Moodle.
 
 function assignmentName() {
     // Grab the assignment name from the document
