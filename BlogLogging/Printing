@@ -1,0 +1,21 @@
+// Moodle Database Activity Javascript Template Function
+// Name: printDiv
+// Description: This function creates a printable area from the page. Pass a div tag name
+// and anything within those div tags will be selected for printing no matter
+// how those things are formatted. Also, once the printing is completed,
+// the page does a reload to reset any other JS functions that may have been
+// upset in the process.
+
+function printDiv(divName) {
+     var printContents = document.getElementsByClassName(divName);
+     var printMe = "";
+     for (i = 0; i < printContents.length; i++) {
+          printMe += printContents[i].innerHTML;
+     }
+     printMe += '<br>LANG=' + document.documentElement.lang;
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printMe;
+     window.print();
+     //document.body.innerHTML = originalContents;
+     location.reload();
+}
