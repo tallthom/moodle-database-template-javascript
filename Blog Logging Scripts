@@ -1,0 +1,277 @@
+
+// This function creates a printable area from the page. Pass a div tag name
+// and anything within those div tags will be selected for printing no matter
+// how those things are formatted
+function printDiv(divName) {
+     var printContents = document.getElementsByClassName(divName);
+     var printMe = "";
+     for (i = 0; i < printContents.length; i++) {
+          printMe += printContents[i].innerHTML;
+     }
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printMe;
+     window.print();
+     //document.body.innerHTML = originalContents;
+     location.reload();
+}
+
+// This function gets an array of items with dates in them and returns the
+// number of unique days in the array. It will even compare dates.
+function uniqueDays(items) {
+   // ja 2018年 04月 12日(Thursday) 12:11 --> 2018041212:11
+   // tw 2018年 04月 12日(Thu) 12:11      --> 2018041212:11
+   // en Thursday, 12 April 2018, 12:11 PM --> 12April201812:11
+   // cn 2018年04月12日 Thursday 12:11      --> 2018041212:11
+   // ko 2018년 April 12일, Thursday, PM 12:11 --> 2018April1212:11
+   var replaceables = ['年','月','日','(',')',',',' ','AM','PM','년','일'];
+   var replaceDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+   var replaceShortDays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+   var index = 0;
+   var days = 0;
+   var aDay = '';
+   for (var i=0; i<items.length; i++) {
+      aDay = items[i].innerHTML;
+      index = aDay.inde
+      aDay = aDay.replace('年','');
+
+
+      if (aDay.search("Monday") >= 0) {
+           days[0] = 1;
+      }
+
+   }
+
+   return (days)
+}
+
+function doMath()
+{
+    // Frequency of days logged
+    var totalfrequency = 0;
+    var days = [0, 0, 0, 0, 0, 0, 0];
+
+    // Time spent blogging
+    var totaltime = 0;
+
+    // Total Words
+    var totalwords = 0;
+
+    // Total Points
+    var totalpoints = 0;
+
+    var timesadded = document.getElementsByClassName('timeadded');
+    var posttitles = document.getElementsByClassName('posttitle');
+    var postwords = document.getElementsByClassName('wordcount');
+    var timesspent = document.getElementsByClassName('timespent');
+    var mediastatuses = document.getElementsByClassName('multimedia');
+
+    // Total number of posts
+    var totalposts = timesadded.length;
+
+    for (var i=0; i<timesadded.length; i++) {
+
+         // Flag one point for each day logged
+        var theDay = timesadded[i].innerHTML;
+        if (theDay.search("Monday") >= 0) {
+             days[0] = 1;
+        }
+        if (theDay.search("Tuesday") >= 0) {
+             days[1] = 1;
+        }
+        if (theDay.search("Wednesday") >= 0) {
+             days[2] = 1;
+        }
+        if (theDay.search("Thursday") >= 0) {
+             days[3] = 1;
+        }
+        if (theDay.search("Friday") >= 0) {
+             days[4] = 1;
+        }
+        if (theDay.search("Saturday") >= 0) {
+             days[5] = 1;
+        }
+        if (theDay.search("Sunday") >= 0) {
+             days[6] = 1;
+        }
+
+        // Grab the number of words written.
+        totalwords = totalwords + parseInt(postwords[i].innerHTML);
+
+        // Grab the time this took to write.
+        totaltime = totaltime + parseInt(timesspent[i].innerHTML);
+
+        // Calculate the media status
+        var anyMedia = mediastatuses[i].innerHTML;
+        if (anyMedia.search("No") >= 0) {
+             mediastatuses[i].innerHTML = "N";
+        }
+        if (anyMedia.search("1") >= 0) {
+             mediastatuses[i].innerHTML = "1";
+        }
+        if (anyMedia.search("2") >= 0) {
+             mediastatuses[i].innerHTML = "2";
+        }
+        if (anyMedia.search("3") >= 0) {
+             mediastatuses[i].innerHTML = "3+";
+        }
+
+    }
+
+    // Now count up the number of unique days logged
+    for (var i=0; i<days.length; i++) {
+        totalfrequency = totalfrequency + days[i];
+    }
+
+    // Frequency of posts
+    switch (totalfrequency) {
+        case 1:
+            document.getElementById('totalfrequency').innerHTML = '<span style="background-color: #FF0000;">&nbsp;1 day - 0 points&nbsp;</span>';
+            break;
+        case 2:
+            document.getElementById('totalfrequency').innerHTML = '<span style="background-color: #FFFF00;">&nbsp;2 days - 3 points&nbsp;</span>';
+            totalpoints = totalpoints + 3;
+            break;
+        case 3:
+            document.getElementById('totalfrequency').innerHTML = '<span style="background-color: #00FF00;">&nbsp;3 days - 4 points&nbsp;</span>';
+            totalpoints = totalpoints + 4;
+            break;
+        case 4:
+            document.getElementById('totalfrequency').innerHTML = '<span style="background-color: #00FFFF;">&nbsp;4 days - 5 points&nbsp;</span>';
+            totalpoints = totalpoints + 5;
+            break;
+        case 5:
+        case 6:
+        case 7:
+            document.getElementById('totalfrequency').innerHTML = '<span style="background-color: #FF00FF;">&nbsp;4+ days - 5 points&nbsp;</span>';
+            totalpoints = totalpoints + 5;
+            break;
+    }
+
+    // Number of posts
+   var totalpostpoints = 0;
+    switch (totalposts) {
+        case 1:
+            totalpostspoints = 0;
+            break;
+        case 2:
+            totalpostspoints = 3;
+            break;
+        case 3:
+            totalpostspoints = 4;
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            totalpostspoints = 5;
+            break;
+    }
+
+    // Display the total number of words written.
+    document.getElementById('totalwordswritten').innerHTML = totalwords.toLocaleString() + ' words';
+
+    // Display the number of minutes spent.
+    document.getElementById('totaltimespent').innerHTML = totaltime + ' mins';
+
+    // Display the total points for this week
+    totalpoints = totalpoints + totalpostspoints;
+    document.getElementById('totalpoints').innerHTML = '+ ' + totalposts + ' posts = Total: ' + totalpoints + ' pts&nbsp;';
+
+}
+
+function formatPostLinks() {
+     // Loop through all the post titles and replace with links.
+     var titles = document.getElementsByClassName('postTitle');
+     var links = document.getElementsByClassName('postLink');
+
+     var shortenstring = '';
+     var linked_title = '';
+     var valid_link = '';
+     var secure_link = '';
+     for (var i = 0; i < titles.length; i++) {
+         linked_title = '<a target="_blank" rel="noreferrer" href="';
+         alinks = links[i].getElementsByTagName('a');
+         for (var j = 0; j < alinks.length; j++) {
+              if (!validate(alinks[j].href)) {
+                  valid_link = ' <-- Link is NOT valid';
+              }
+              secure_link = alinks[j].href;
+              linked_title += secure_link.replace("http:", "https:");
+         }
+
+         // Shorten the post title a bit if needed
+         shortenstring = titles[i].innerHTML;
+         links[i].innerHTML = '';
+         linked_title += '"><b><i>"<u>' + shortenstring.substring(0, 27) + '...' + '</u>"</i></b></a>';
+         linked_title += valid_link;
+         titles[i].innerHTML = linked_title;
+     }
+}
+
+function validate(url) {
+        var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        if (pattern.test(url)) {
+            return true;
+        }
+            return false;
+
+}
+
+function formatPostLinksAndEmbed() {
+     // Loop through all the post titles and replace with links.
+     var titles = document.getElementsByClassName('postTitle');
+     var links = document.getElementsByClassName('postLink');
+     var embedded_posts = document.getElementsByClassName('embedPost');
+
+     var linked_title = '';
+     var valid_link = '';
+     var secure_link = '';
+     var embed_line = '';
+
+     for (var i = 0; i < titles.length; i++) {
+         linked_title = '<a target="_blank" rel="noreferrer" href="';
+         embed_line = '<embed width="100%" height="475px" src="';
+         alinks = links[i].getElementsByTagName('a');
+         for (var j = 0; j < alinks.length; j++) {
+              if (!validate(alinks[j].href)) {
+                  valid_link = ' <-- Link is NOT valid';
+              }
+              secure_link = alinks[j].href;
+              secure_link = secure_link.replace("http:", "https:");
+              linked_title += secure_link;
+              embed_line += secure_link;
+         }
+         links[i].innerHTML = '';
+         linked_title += '"><b><i>"<u>' + titles[i].innerHTML + '</u>"</i></b></a>';
+         linked_title += valid_link;
+         titles[i].innerHTML = linked_title;
+         embed_line += '">';
+         embed_line += '<br><b>Link:</b> ';
+         embed_line += secure_link;
+         embedded_posts[i].innerHTML = embed_line;
+     }
+}
+
+function assignmentName() {
+    var the_assignment = document.getElementById('assignmentname').innerHTML;
+    var users = document.getElementsByClassName('theUser');
+     var is_same = true;
+     for (var i = 0; i < users.length-1; i++) {
+          if (users[i].innerHTML != users[i+1].innerHTML) {
+             is_same = false;
+          }
+    }
+    if (users.length > 1) {
+        the_assignment += 's';
+    }
+    if (is_same) {
+        the_assignment += ' by ' + users[0].innerHTML;
+    }
+    if (is_same) {
+        for (var i = 0; i < users.length; i++) {
+            users[i].innerHTML = '';
+        }
+    }
+    document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
+}
