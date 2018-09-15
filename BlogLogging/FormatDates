@@ -35,8 +35,8 @@ Date.prototype.uniformDate = function(format_requested) {
             break;
         case 4:
             var formattedDate = '';
-            formattedDate += '<div class="thetime">' + (hh[1]?hh:"0"+hh[0]) + ':' + (mm[1]?mm:"0"+mm[0]) + '</div>';
             formattedDate += '<div class="thedate">' + yyyy + '-' + (MM[1]?MM:"0"+MM[0]) + '-' + (dd[1]?dd:"0"+dd[0]) + '</div>';
+            formattedDate += '<div class="thetime">' + (hh[1]?hh:"0"+hh[0]) + ':' + (mm[1]?mm:"0"+mm[0]) + '</div>';
             formattedDate += '<div class="theday">' + shortDay + '</div>';
             return formattedDate;
             break;
@@ -67,7 +67,7 @@ function formatDates() {
     var some_timesadded = document.getElementsByClassName('timeadded');
     var some_datesreported = document.getElementsByClassName('datereported');
 
-    // ja 2018年 04月 12日(Thursday) 12:11 --> 2018 04 12 Thursday 12:11
+    // ja 2018年 04月 12日(Thursday) 12:11 --> 2018-04-12 Thu 12:11
     // en Thursday, 12 April 2018, 12:11 PM --> 12April201812:11
     // tw 2018年 04月 12日(Thu) 12:11      --> 2018041212:11
     // cn 2018年04月12日 Thursday 12:11      --> 2018041212:11
