@@ -45,9 +45,12 @@ function formatPostLinks() {
          }
 
          // Shorten the post title a bit if needed
-         shortenstring = titles[i].innerHTML;
+         var linkstring = titles[i].innerHTML;
+         if (linkstring.length > 45) {
+            linkstring = linkstring.substring(0, 45) + '...';
+         }
          links[i].innerHTML = '';
-         linked_title += '"><b><i>"<u>' + shortenstring.substring(0, 27) + '...' + '</u>"</i></b></a>';
+         linked_title += '"><b><i>"<u>' + linkstring + '</u>"</i></b></a>';
          linked_title += valid_link; // Add the warning if the link is not valid
          // Replace the title with the linked title
          titles[i].innerHTML = linked_title;

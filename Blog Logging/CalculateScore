@@ -1,41 +1,6 @@
 // Moodle Database Activity Javascript Template Function
-// Name: uniqueDays
-// Description: This script takes the Moodle Database Logged dates in a list
-// view and counts the number of unique dates in the array. It uses the
-// document attribute LANG to determine how to format the date.
-
-function uniqueDays(items) {
-    var doc_lang = document.documentElement.lang;
-
-    // ja 2018年 04月 12日(Thursday) 12:11 --> 2018 04 12 Thursday 12:11
-    // en Thursday, 12 April 2018, 12:11 PM --> 12April201812:11
-    // tw 2018年 04月 12日(Thu) 12:11      --> 2018041212:11
-    // cn 2018年04月12日 Thursday 12:11      --> 2018041212:11
-    // ko 2018년 April 12일, Thursday, PM 12:11 --> 2018April1212:11
-
-    //var all_replaceables = ['年','月','日','(',')',',',' ','AM','PM','년','일'];
-    var jp_replaceables = ['年','月','日','(',')'];
-    var jp_replaceables = ['年','月','日','(',')',',',' ','AM','PM','년','일'];
-
-    var replaceDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var replaceShortDays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    var index = 0;
-    var days = 0;
-    var aDay = '';
-   for (var i=0; i<items.length; i++) {
-      aDay = items[i].innerHTML;
-      index = aDay.inde
-      aDay = aDay.replace('年','');
-
-
-      if (aDay.search("Monday") >= 0) {
-           days[0] = 1;
-      }
-
-   }
-
-   return (days)
-}
+// Name: doMath
+// Description: Calculates the total score based on posts per week.
 
 function doMath()
 {
