@@ -1,0 +1,52 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatPostLink
+// Description: Receives a MDBA URL field and replaces the title
+// with a custom title passed into the function. The return value is
+// a new URL. Note, any modification to the title should be completed
+// before this routine is called.
+
+function formatPostLink(url,title) {
+    return url.innerHTML = title;
+}
+
+// Moodle Database Activity Javascript Template Function
+// Name: formatPostLinksAndEmbed
+// Description: This script does the same things as formatPostLinks
+// script but also creates an embed item for the entire URL.
+// Note: Moodle requires HTTPS links to embed.
+
+function formatPostLinksAndEmbed() {
+    var titles = document.getElementsByClassName('postTitle');
+    var links = document.getElementsByClassName('postLink');
+    var embedded_posts = document.getElementsByClassName('embedPost');
+
+    var linked_title = '';
+    var valid_link = '';
+    var secure_link = '';
+    var embed_line = '';
+
+    for (var i = 0; i < titles.length; i++) {
+        linked_title = '<a target="_blank" rel="noreferrer" href="';
+        embed_line = '<embed width="100%" height="475px" src="';
+        alinks = links[i].getElementsByTagName('a');
+        for (var j = 0; j < alinks.length; j++) {
+            secure_link = alinks[j].href;
+            secure_link = secure_link.replace("http:", "https:");
+            if (!validate(secure_link)) {
+                valid_link = ' <-- Link is NOT valid';
+            }
+            linked_title += secure_link;
+            embed_line += secure_link;
+        }
+        // Finish making the linked title
+        links[i].innerHTML = '';
+        linked_title += '"><b><i>"<u>' + titles[i].innerHTML + '</u>"</i></b></a>';
+        linked_title += valid_link;
+        titles[i].innerHTML = linked_title;
+        // Finish making the embed object
+        embed_line += '">';
+        embed_line += '<br><b>Link:</b> ';
+        embed_line += secure_link;
+        embedded_posts[i].innerHTML = embed_line;
+     }
+}

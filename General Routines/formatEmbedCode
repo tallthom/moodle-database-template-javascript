@@ -1,0 +1,13 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatEmbedCode
+// Description: Takes in a A HREF URL and creates an EMBED code from it
+// which is the return value.
+
+function formatEmbedCode(url) {
+    var embed_code = '<embed width="100%" height="500px" src="';
+    embed_code += url.href;
+    embed_code += '">';
+    embed_code += '<br><b>Link:</b> ';
+    embed_code += secure_link;
+    return embed_code.replace("http:", "https:");
+}

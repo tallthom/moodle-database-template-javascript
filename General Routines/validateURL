@@ -1,0 +1,16 @@
+// Moodle Database Activity Javascript Template Function
+// Name: validateURL
+// Description: Simply validates a URL by checking to see
+// if it falls within expected URL standard formatting.
+// Accepts a URL as an argument and returns true or false.
+
+function validate(url) {
+    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    // Compare the URL with the pattern
+    if (pattern.test(url)) {
+        // Valid URL
+        return true;
+    }
+    // Not a valid URL
+    return false;
+}
