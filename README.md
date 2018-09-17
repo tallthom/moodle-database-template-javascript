@@ -1,10 +1,11 @@
-# Moodle Database Template Javascript
+# Moodle Database Activity Templates
 
-# Working on some template scripts to make database activities display
-# in a more dynamic way. These scripts are specific for Moodle Database
-# Template Javascript and require understanding of the type of Moodle
-# Database activity for which they are designed.
-
-# The Blog Logging scripts are useful for students making a database of
-# blog post entries they made on their own blog. The template assumes they
-# have a URL field and some other fields which will be published here later
+# Using Moodle Database Activity to have students track self-study behaviors
+# is useful for teachers to keep students focused and on task for learning
+# a language. These scripts are designed to help format the list view and the
+# single view of the Moodle Database Activity. There are fields required
+# to make use of these templates which are part of the core Database Activity
+# fields available in Moodle. Each type of database activity will have an
+# explanation of the fields that need to be defined. The latest templates
+# are able to be copied into the template section of the Moodle Database
+# Activity being used.
