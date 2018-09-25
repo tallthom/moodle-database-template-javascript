@@ -27,20 +27,48 @@ function formatDates() {
     // tw 2018年 04月 12日(Thu) 12:11
     // cn 2018年04月12日 Thursday 12:11
     // ko 2018년 April 12일, Thursday, PM 12:11
+
     if (doc_lang != "en") {
-        var replaceList = ['年', '月', '日', '년', '일', 'AM', 'PM', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        for (i = 0; i < some_datesadded.length; i++) {
-            var worker1 = some_datesadded[i].innerHTML;
-            var worker2 = some_datesreported[i].innerHTML;
-            for (i = 0; i < replaceList.length; i++) {
-                var re = RegExp(replaceList[i], 'gi');
-                worker1 = worker1.replace(re, ' ');
-                worker2 = worker2.replace(re, ' ');
-            }
-            some_datesadded[i].innerHTML = worker1;
-            some_datesreported[i].innerHTML = worker2;
+        replaceWords = ['年','']
+        for (var i=0; i<some_datesadded.length; i++) {
+            var worker = some_datesadded[i].innerHTML;
+            worker = worker.replace(/[(年月日년일,)]/g, ' '); // Dice off characters
+            worker = worker.replace(/AM/i, ' '); // Dice off AM
+            worker = worker.replace(/PM/i, ' '); // Dice off PM
+            worker = worker.replace(/Mon/i, ' '); // Dice days of the week
+            worker = worker.replace(/Tue/i, ' '); // Dice days of the week
+            worker = worker.replace(/Wed/i, ' '); // Dice days of the week
+            worker = worker.replace(/Thu/i, ' '); // Dice days of the week
+            worker = worker.replace(/Fri/i, ' '); // Dice days of the week
+            worker = worker.replace(/Sat/i, ' '); // Dice days of the week
+            worker = worker.replace(/Sun/i, ' '); // Dice days of the week
+            worker = worker.replace(/nesday/i, ' '); // Dice days of the week
+            worker = worker.replace(/urday/i, ' '); // Dice days of the week
+            worker = worker.replace(/rsday/i, ' '); // Dice days of the week
+            worker = worker.replace(/sday/i, ' '); // Dice days of the week
+            worker = worker.replace(/day/i, ' '); // Dice days of the week
+            some_datesadded[i].innerHTML = worker;
+
+            var worker = some_datesreported[i].innerHTML;
+            worker = worker.replace(/[(年月日년일,)]/g, ' '); // Dice off characters
+            worker = worker.replace(/AM/i, ' '); // Dice off AM
+            worker = worker.replace(/PM/i, ' '); // Dice off PM
+            worker = worker.replace(/Mon/i, ' '); // Dice days of the week
+            worker = worker.replace(/Tue/i, ' '); // Dice days of the week
+            worker = worker.replace(/Wed/i, ' '); // Dice days of the week
+            worker = worker.replace(/Thu/i, ' '); // Dice days of the week
+            worker = worker.replace(/Fri/i, ' '); // Dice days of the week
+            worker = worker.replace(/Sat/i, ' '); // Dice days of the week
+            worker = worker.replace(/Sun/i, ' '); // Dice days of the week
+            worker = worker.replace(/nesday/i, ' '); // Dice days of the week
+            worker = worker.replace(/urday/i, ' '); // Dice days of the week
+            worker = worker.replace(/rsday/i, ' '); // Dice days of the week
+            worker = worker.replace(/sday/i, ' '); // Dice days of the week
+            worker = worker.replace(/day/i, ' '); // Dice days of the week
+            some_datesreported[i].innerHTML = worker.replace(/[(年月日년일),]/g, ' ');
         }
     }
+
 
     // Parse the date array and make it display uniformly.
     for (var i=0; i<some_datesadded.length; i++) {
