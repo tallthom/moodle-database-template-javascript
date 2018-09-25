@@ -1,30 +1,28 @@
 // Moodle Database Activity Javascript Template Function
-// Name: validate
-// Description: Simply validates a URL by checking to see
-// if it falls within expected URL standard formatting
+// Name: formatBlogLinksList
+// Description: Loops through all the URLs on the page and formats them
+// with a title from the same line.
 
-function validate(url) {
-    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    // Compare the URL with the pattern
-    if (pattern.test(url)) {
-        // Valid URL
-        return true;
+function formatBlogLinksList() {
+    // Grab all URL and all Titles of posts
+    var links = document.getElementsByClassName('postLink');
+    var titles = document.getElementsByClassName('postTitle');
+
+    // Loop through and process titles.
+    for (var i = 0; i < titles.length; i++) {
+        // Loop through and shorten titles if needed
+
+
+        var alinks = links[i].innerHTML; // Grab the a href bit
+        alinks.innerHTML = titles[i].innerHTML; // replace the title
+        alinks.href = alinks.href.replace("http:", "https:"); // https
+        if (!validateURL(alinks.href)) {
+            alinks.innerHTML += ' <-- Link is NOT valid!';
+        }
+        titles[i].innerHTML = alinks;
+        alinks[i].innerHTML = '';
     }
-    // Not a valid URL
-    return false;
 }
-
-// Moodle Database Activity Javascript Template Function
-// Name: formatPostLinks
-// Description: This script formats Moodle DB URL fields
-// and turns them into a link using another Moodle DB field
-// as the URL title. It also shortens the length of the URL title
-// so it fits on one line in a table.
-
-function formatPostLinks() {
-     // Loop through all the post titles and replace with links.
-     var titles = document.getElementsByClassName('postTitle');
-     var links = document.getElementsByClassName('postLink');
 
      var shortenstring = '';
      var linked_title = '';

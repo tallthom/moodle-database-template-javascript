@@ -1,9 +1,12 @@
 
 // Moodle Database Activity Javascript Template Function
-// Name: uniformDate prototype function
+// Name: uniformDateTime prototype function
 // Description: Format the date in a uniform method
+// Format 1 - YYYY-Mon-DD (short month)
+// Format 2 - HH:MM (time only)
+// Format 3 - Day (short day only)
 
-Date.prototype.uniformDate = function(format_requested) {
+Date.prototype.uniformDateTime = function(format_requested) {
     var yyyy = this.getFullYear().toString();
     var MM = (this.getMonth()+1).toString();
     var dd  = this.getDate().toString();

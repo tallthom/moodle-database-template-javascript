@@ -36,11 +36,11 @@ function formatDates() {
     // Parse the date array and make it display uniformly.
     for (var i=0; i<some_datesadded.length; i++) {
         var a_date = new Date(some_datesadded[i].innerHTML);
-        some_datesadded[i].innerHTML = a_date.uniformDate(1);
-        some_timesadded[i].innerHTML = a_date.uniformDate(2);
-        some_daysadded[i].innerHTML = a_date.uniformDate(3);
+        some_datesadded[i].innerHTML = a_date.uniformDateTime(1);
+        some_timesadded[i].innerHTML = a_date.uniformDateTime(2);
+        some_daysadded[i].innerHTML = a_date.uniformDateTime(3);
         var a_date = new Date(some_datesreported[i].innerHTML);
-        some_datesreported[i].innerHTML = a_date.uniformDate(1);
-        some_daysreported[i].innerHTML = a_date.uniformDate(3);
+        some_datesreported[i].innerHTML = a_date.uniformDateTime(1);
+        some_daysreported[i].innerHTML = a_date.uniformDateTime(3);
     }
 }

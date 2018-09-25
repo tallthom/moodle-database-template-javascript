@@ -1,0 +1,38 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatBlogLinksList
+// Description: Loops through all the URLs on the page and formats them
+// with a title from the same line.
+
+function formatBlogLinksList() {
+
+    // Grab all URL and all Titles of posts
+    var links = document.getElementsByClassName('postLink');
+    var titles = document.getElementsByClassName('postTitle');
+
+    // Loop through and process titles.
+    for (var i = 0; i < titles.length; i++) {
+        // Loop through and shorten titles if needed
+        if (titles[i].innerHTML.length > 45) {
+           titles[i].innerHTML = titles[i].innerHTML.substring(0, 45) + '...';
+        }
+        var a_link = links[i].innerHTML;
+        a_link.innerHTML = titles[i].innerHTML; // replace the title
+        var a_links = links[i].getElementsByTagName('a');
+        for (var j = 0; j < alinks.length; j++) {
+            secure_link = alinks[j].href;
+            secure_link = secure_link.replace("http:", "https:");
+            // Make sure the link is a valid URL
+            if (!validate(secure_link)) {
+                valid_link = ' <-- Link is NOT valid';
+            }
+            linked_title += secure_link;
+         }
+
+                 links[i].innerHTML = a_link.innerHTML.replace("http:", "https:");
+        if (!validateURL(links[i].innerHTML.href)) {
+            links[i].innerHTML.title += ' <-- Link is NOT valid!';
+        }
+        titles[i].innerHTML = links[i].innerHTML;
+        links[i].innerHTML = '';
+    }
+}

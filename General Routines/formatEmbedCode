@@ -8,6 +8,6 @@ function formatEmbedCode(url) {
     embed_code += url.href;
     embed_code += '">';
     embed_code += '<br><b>Link:</b> ';
-    embed_code += secure_link;
+    embed_code += url.href;
     return embed_code.replace("http:", "https:");
 }

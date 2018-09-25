@@ -1,8 +1,8 @@
 // Moodle Database Activity Javascript Template Function
-// Name: doMath
-// Description: Calculates the total score based on posts per week.
+// Name: countPosts
+// Description: Counts the number posts in the writing skills blog log.
 
-function doMath()
+function countPosts()
 {
     // Frequency of days logged
     var totalfrequency = 0;
