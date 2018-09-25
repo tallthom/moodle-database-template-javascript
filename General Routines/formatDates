@@ -21,17 +21,26 @@ function formatDates() {
     var some_datesreported = document.getElementsByClassName('datereported');
     var some_daysreported = document.getElementsByClassName('dayreported');
 
-    // ja 2018年 04月 12日(Thursday) 12:11 --> 2018-04-12 Thu 12:11
-    // en Thursday, 12 April 2018, 12:11 PM --> 12April201812:11
-    // tw 2018年 04月 12日(Thu) 12:11      --> 2018041212:11
-    // cn 2018年04月12日 Thursday 12:11      --> 2018041212:11
-    // ko 2018년 April 12일, Thursday, PM 12:11 --> 2018April1212:11
-
-    //var all_replaceables = ['年','月','日','(',')',',',' ','AM','PM','년','일'];
-    //var jp_replaceables = ['年','月','日','(',')'];
-    //var jp_replaceables = ['年','月','日','(',')',',',' ','AM','PM','년','일'];
-    //var replaceDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    //var replaceShortDays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    // Non-English dates need this routine
+    // ja 2018年 04月 12日(Thursday) 12:11
+    // en Thursday, 12 April 2018, 12:11 PM
+    // tw 2018年 04月 12日(Thu) 12:11
+    // cn 2018年04月12日 Thursday 12:11
+    // ko 2018년 April 12일, Thursday, PM 12:11
+    if (doc_lang != "en") {
+        var replaceList = ['年', '月', '日', '년', '일', 'AM', 'PM', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        for (i = 0; i < some_datesadded.length; i++) {
+            var worker1 = some_datesadded[i].innerHTML;
+            var worker2 = some_datesreported[i].innerHTML;
+            for (i = 0; i < replaceList.length; i++) {
+                var re = RegExp(replaceList[i], 'gi');
+                worker1 = worker1.replace(re, ' ');
+                worker2 = worker2.replace(re, ' ');
+            }
+            some_datesadded[i].innerHTML = worker1;
+            some_datesreported[i].innerHTML = worker2;
+        }
+    }
 
     // Parse the date array and make it display uniformly.
     for (var i=0; i<some_datesadded.length; i++) {
