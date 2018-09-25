@@ -1,9 +1,8 @@
 // Moodle Database Activity Javascript Template Function
-// Name: formatPostComment
+// Name: formatPostCommentList
 // Description: Changes the words Post/Comment to P/C
 
-function formatPostComment() {
-
+function formatPostCommentList() {
     // Grab all URL and all Titles of posts
     var pc = document.getElementsByClassName('postcomment');
 

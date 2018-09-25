@@ -1,0 +1,13 @@
+// Moodle Database Activity Javascript Template Function
+// Name: blogLoggingListView
+// Description: Formats the Blog Log List view using all available Javascript
+// functions.
+
+function blogLoggingListView() {
+    assignmentName(); // Format the assignment name
+    formatPostCommentList(); // Minimizes the word Post/Comment to P/C
+    formatBlogLinksList(); // Formats the links on each line
+    countPosts(); // Counts the number of posts and words on unique days
+    countComments(); // Counts the number of comments and words on unique days
+    calculateScore(); // Calculates the rough score of the log
+}
