@@ -1,0 +1,16 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatMultimediaList
+// Description: Shortens the MM for the list view
+
+function formatMultimediaList() {
+    // Grab all URL and all Titles of posts
+    var multimedia = document.getElementsByClassName('multimedia');
+
+    // Loop through and process post/comment.
+    for (var i = 0; i < multimedia.length; i++) {
+        var media = multimedia[i].innerHTML;
+        if ( media.search('1') >= 0 ) { multimedia[i].innerHTML = '1'; }
+        if ( media.search('2') >= 0 ) { multimedia[i].innerHTML = '2'; }
+        if ( media.search('3') >= 0 ) { multimedia[i].innerHTML = '3+'; }
+    }
+}

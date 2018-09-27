@@ -1,9 +1,34 @@
 // Moodle Database Activity Javascript Template Function
-// Name: countPosts
-// Description: Counts the number posts in the writing skills blog log.
+// Name: calculateScores
+// Description: Calculates a score based on the post and the number
+// of words that have been written. Only the best post on a day will
+// be counted. Also, only the three best posts in the log will be counted.
+// If all the posts have a multimedia item (at least one), then an extra
+// bonus point will be added.
 
-function countPosts()
+function calculateScores()
 {
+    var postcomment = document.getElementsByClassName('postcomment');
+    var dateadded = document.getElementsByClassName('dateadded');
+    var datereported = document.getElementsByClassName('datereported');
+    var wordcount = document.getElementsByClassName('wordcount');
+    var multmedia = document.getElementsByClassName('multimedia');
+    var timespent = document.getElementsByClassName('timespent');
+    var postpoints = document.getElementsByClassName('postpoints');
+
+    // First, loop through and assign points to each post (not comment)
+    for (var i=0; i<postcomment.length; i++) {
+        if (postcomment[i].innerHTML != 'C') {
+            var words = parseInt(wordcount[i].innerHTML);
+            var points = 0;
+            if (words > 50) {points = points + 1; }
+            if (words > 100) {points = points + 1; }
+            if (words > 150) {points = points + 1; }
+            postpoints[i].innerHTML = points;
+        }
+    }
+}
+
     // Frequency of days logged
     var totalfrequency = 0;
     var days = [0, 0, 0, 0, 0, 0, 0];
