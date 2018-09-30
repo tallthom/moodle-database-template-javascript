@@ -9,6 +9,7 @@ function formatMultimediaList() {
     // Loop through and process post/comment.
     for (var i = 0; i < multimedia.length; i++) {
         var media = multimedia[i].innerHTML;
+        multimedia[i].innerHTML = '0';
         if ( media.search('1') >= 0 ) { multimedia[i].innerHTML = '1'; }
         if ( media.search('2') >= 0 ) { multimedia[i].innerHTML = '2'; }
         if ( media.search('3') >= 0 ) { multimedia[i].innerHTML = '3+'; }

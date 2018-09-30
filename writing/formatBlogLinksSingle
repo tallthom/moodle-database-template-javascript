@@ -1,9 +1,9 @@
 // Moodle Database Activity Javascript Template Function
-// Name: formatBlogLinksList
+// Name: formatBlogLinksSingle
 // Description: Loops through all the URLs on the page and formats them
-// with a title from the same line.
+// with a title from the same line. (Doesn't shorten the title)
 
-function formatBlogLinksList() {
+function formatBlogLinksSingle() {
 
     // Grab all URL and all Titles of posts
     var links = document.getElementsByClassName('postLink');
@@ -11,10 +11,6 @@ function formatBlogLinksList() {
 
     // Loop through and process titles and URLs.
     for (var i = 0; i < titles.length; i++) {
-        // Loop through and shorten titles if needed
-        if (titles[i].innerHTML.length > 45) {
-           titles[i].innerHTML = titles[i].innerHTML.substring(0, 45) + '...';
-        }
         // Make sure we have an SSL connection
         var secure_link = links[i].childNodes[0].href;
         secure_link = secure_link.replace('http:', 'https:');

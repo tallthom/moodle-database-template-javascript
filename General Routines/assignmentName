@@ -10,6 +10,7 @@ function assignmentName() {
     var the_assignment = document.title;
     // Strip of the preceding course name
     the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
+    var single_user = '';
 
     // Grab all usernames from the page.
     var users = document.getElementsByClassName('theUser');
@@ -29,7 +30,8 @@ function assignmentName() {
 
     // If the user is the same, report to who the assignment belongs
     if (is_same) {
-        the_assignment += ' by ' + users[0].innerHTML;
+        single_user = users[0].innerHTML;
+        the_assignment += ' by ' + single_user;
 
         // Now blank out the user names in this screen since we
         // reported it in the assignment name line.
@@ -41,4 +43,5 @@ function assignmentName() {
 
     // Lastly, replace the assignment name with our improved version.
     document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
+    document.getElementById('usersignature').innerHTML = single_user;
 }
