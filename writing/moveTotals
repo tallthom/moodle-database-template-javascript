@@ -1,0 +1,57 @@
+// Moodle Database Activity Javascript Template Function
+// Name: moveTotals
+// Description: Determines where in the list view the posts end for a user
+// and moves the totals line after the last post and before the first
+// comment. Only does this for a single user.
+
+function moveTotals() {
+    var page_users = document.getElementsByClassName('theUser');
+    var single_user = new Set;
+    for (var i=0; i<page_users.length; i++) {
+       single_user.add(page_users[i].innerHTML);
+    }
+
+    if (single_user.size = 1) {
+        var subtotalarea = document.getElementsByClassName('postSubtotalArea');
+        var postcomment = document.getElementsByClassName('postcomment');
+        var is_post_comment = new Set;
+        for (var i=0; i<postcomment.length; i++) {
+           is_post_comment.add(postcomment[i].innerHTML);
+        }
+        if (postcomment.length > 1) {
+            for (var i=0; i<postcomment.length-1; i++) {
+                if (postcomment[i+1] == 'C') {
+                    subtotalarea[i].innerHTML = document.getElementById('postTotal');
+                    document.getElementById('postTotal').innerHTML = '';
+                }
+            }
+        }
+    }
+}
+
+// Moodle Database Activity Javascript Template Function
+// Name: moveTotals
+// Description: Determines where in the list view the posts end for a user
+// and moves the totals line after the last post and before the first
+// comment. Only does this for a single user.
+
+function moveTotals() {
+    var page_users = document.getElementsByClassName('theUser');
+    var single_user = new Set;
+    for (var i=0; i<page_users.length; i++) {
+       single_user.add(page_users[i].innerHTML);
+    }
+
+    if (single_user.size = 1) {
+        var subtotalarea = document.getElementsByClassName('postSubtotalArea');
+        var postcomment = document.getElementsByClassName('postcomment');
+        var is_post_comment = new Set;
+        for (var i=0; i<postcomment.length; i++) {
+           is_post_comment.add(postcomment[i].innerHTML);
+        }
+        if (postcomment.length > 1) {
+                    subtotalarea[2].innerHTML = document.getElementById('postTotal').innerHTML + '<br>';
+                    document.getElementById('postTotal').innerHTML = '';
+        }
+    }
+}
