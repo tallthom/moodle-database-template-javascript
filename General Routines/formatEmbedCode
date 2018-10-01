@@ -4,10 +4,10 @@
 // which is the return value.
 
 function formatEmbedCode(url) {
-    var embed_code = '<embed width="100%" height="500px" src="';
+    var embed_code = '<embed width="100%" height="300px" src="';
     embed_code += url.href;
     embed_code += '">';
-    embed_code += '<br><b>Link:</b> ';
+    embed_code += '<br><b align="left">Link:</b> ';
     embed_code += url.href;
     return embed_code.replace("http:", "https:");
 }
