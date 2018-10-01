@@ -5,23 +5,20 @@
 
 function formatBlogLinksSingle() {
 
-    // Grab all URL and all Titles of posts
-    var links = document.getElementsByClassName('postLink');
-    var titles = document.getElementsByClassName('postTitle');
+    // Grab the URL and the title of posts
+    var link = document.getElementById('thePostLink');
+    var title = document.getElementById('thePostTitle');
 
-    // Loop through and process titles and URLs.
-    for (var i = 0; i < titles.length; i++) {
-        // Make sure we have an SSL connection
-        var secure_link = links[i].childNodes[0].href;
-        secure_link = secure_link.replace('http:', 'https:');
-        links[i].childNodes[0].href = secure_link;
+    // Make sure we have an SSL connection
+    var secure_link = link.childNodes[0].href;
+    secure_link = secure_link.replace('http:', 'https:');
+    link.childNodes[0].href = secure_link;
 
-        // Verify the link and notify if it isn't valid!
-        if (!validateURL(secure_link)) {
-            title[i].innerHTML += ' <-- Invalid Link';
-        }
-
-        links[i].childNodes[0].innerHTML = titles[i].innerHTML;
-        titles[i].innerHTML = '';
+    // Verify the link and notify if it isn't valid!
+    if (!validateURL(secure_link)) {
+        title.innerHTML += ' <-- Invalid Link';
     }
+
+    link.childNodes[0].innerHTML = title.innerHTML;
+    title.innerHTML = '';
 }

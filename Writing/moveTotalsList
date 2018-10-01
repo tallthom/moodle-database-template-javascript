@@ -1,0 +1,29 @@
+// Moodle Database Activity Javascript Template Function
+// Name: moveTotalsList
+// Description: Determines where in the list view the posts end for a user
+// and moves the totals line after the last post and before the first
+// comment. Only does this for a single user.
+function moveTotalsList() {
+    var subtotalarea = document.getElementsByClassName('postSubtotalArea');
+    var postcomment = document.getElementsByClassName('postcomment');
+    var theuser = document.getElementsByClassName('theUser');
+
+    var is_single_user = new Set;
+    for (var i=0; i<theuser.length; i++) {
+       is_single_user.add(theuser[i].childNodes[0].innerHTML);
+    }
+
+    // Move things only for single users
+    if (is_single_user.size == 1) {
+        first_comment = 0;
+        for (var i=0; i<postcomment.length; i++) {
+            if (first_comment == 0) {
+                if (postcomment[i].innerHTML == 'C' ) {
+                    first_comment = 1;
+                    subtotalarea[i-1].innerHTML = document.getElementById('postTotal').innerHTML;
+                    document.getElementById('postTotal').innerHTML = '';
+                }
+            }
+        }
+    }
+}

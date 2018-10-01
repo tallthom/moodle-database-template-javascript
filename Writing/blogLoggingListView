@@ -10,4 +10,14 @@ function blogLoggingListView() {
     countPosts(); // Counts the number of posts and words on unique days
     countComments(); // Counts the number of comments and words on unique days
     calculateScore(); // Calculates the rough score of the log
+
+    formatPostCommentList();
+    formatDates();
+    formatMultimediaList();
+    formatBlogLinksList();
+    moveTotalsList();
+    assignmentName();
+    calculateScores();
+    calculatePostTotals();
+    calculateCommentTotals();
 }

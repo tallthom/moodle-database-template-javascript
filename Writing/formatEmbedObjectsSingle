@@ -1,0 +1,8 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatEmbedObjectsSingle
+// Description: This script creates an embed object for a URL.
+
+function formatEmbedObjectsSingle() {
+    var links = document.getElementById('thePostLink');
+    document.getElementById('thePostLink') = formatEmbedCode(links.childNodes[0].href);
+}

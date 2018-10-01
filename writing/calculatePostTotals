@@ -72,9 +72,10 @@ function calculatePostTotals()
         total_points += 1; // Add one for full MM usage
     }
 
-    document.getElementById('totalpostlogged').innerHTML = unique_datesadded.size + ' days logged';
-    document.getElementById('totalpostreported').innerHTML = unique_datesreported.size + ' days reported';
-    document.getElementById('totalpostwordcount').innerHTML = total_words.toLocaleString() + ' words';
-    document.getElementById('totalposttimespent').innerHTML = total_time.toLocaleString() + ' minutes';
-    document.getElementById('totalpostlogpoints').innerHTML = total_points.toLocaleString() + ' total points';
+    document.getElementById('totalpostlogged').innerHTML = unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged';
+    document.getElementById('totalpostreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totalpostwordcount').innerHTML = total_words.toLocaleString() + ' word' + ((total_words != 1) ? 's' : '');
+    document.getElementById('totalposttimespent').innerHTML = total_time.toLocaleString() + ' minute' + ((total_time != 1) ? 's' : '');
+    document.getElementById('totalpostlogpoints').innerHTML = total_points.toLocaleString() + ' point' + ((total_points != 1) ? 's' : '') + ' total';
+
 }
