@@ -8,7 +8,7 @@ Reading Skills - Students learning EFL use Graded Readers to practice their Engl
 
 -- Weekly ER Time Logging <-- Students log the time they spend reading
 -- Book Quiz Make-Up   <-- Students write a short report if they fail a quiz
--- Weekly Book Reports <-- Studensts use MDBA to write a book report
+-- Weekly Book Reports <-- Students use MDBA to write a book report
 
 Vocabulary Skills - Each student has a different level with vocabulary when it comes to learning English. They need to focus on the current list of words that are appropriate for them. This MDBA activity helps them track the time they spend studying vocabulary (VS).
 

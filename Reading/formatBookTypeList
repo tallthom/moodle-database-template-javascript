@@ -1,0 +1,14 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatBookTypeList
+// Description: Changes the words Paper/Digital to P/D
+
+function formatBookTypeList() {
+    // Grab all URL and all Titles of posts
+    var pd = document.getElementsByClassName('booktype');
+
+    // Loop through and process post/comment.
+    for (var i = 0; i < pd.length; i++) {
+        var shorten = pd[i].innerHTML;
+        pd[i].innerHTML = shorten.substring(0,1);
+    }
+}

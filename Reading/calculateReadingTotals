@@ -1,0 +1,95 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateReadingTotals
+// Description: Reviews the logs and totals them based
+// on the rubric defined here.
+
+function calculateReadingTotals()
+{
+    var dateadded = document.getElementsByClassName('dateadded');
+    var datereported = document.getElementsByClassName('datereported');
+    var wordcount = document.getElementsByClassName('bookwords');
+    var timespent = document.getElementsByClassName('timespent');
+    var bs = document.getElementsByClassName('bookstatus');
+
+    // Determine unique days with the best possible score.
+    var unique_datesadded = new Set;
+    var unique_datesreported = new Set;
+
+    var total_words = 0;
+    var total_time = 0;
+    var total_points = 0; // The total value of this log...
+
+    // Make unique sets of dates added and reported
+    // Also, count up totals
+    for (var i=0; i<dateadded.length; i++) {
+        unique_datesadded.add(dateadded[i].innerHTML);
+        unique_datesreported.add(datereported[i].innerHTML);
+
+        if (bs[i].innerHTML != "Still reading") {
+            total_words += parseInt(wordcount[i].innerHTML);
+        }
+        wordcount[i].innerHTML = parseInt(wordcount[i].innerHTML).toLocaleString();
+        total_time += parseInt(timespent[i].innerHTML);
+    }
+
+    // Points for days (and color)
+    var day_points = 0;
+    var highlight_color = "";
+    switch (unique_datesadded.size) {
+        case 1:
+            day_points = 0;
+            highlight_color ="#FF0000";
+            break;
+        case 2:
+            day_points = 2;
+            highlight_color ="#FFA500";
+            break;
+        case 3:
+            day_points = 3;
+            highlight_color ="#FFFF00";
+            break;
+        case 4:
+            day_points = 4;
+            highlight_color ="#00FF00";
+            break;
+        case 5:
+            day_points = 5;
+            highlight_color ="#00FFFF";
+            break;
+        default:
+            day_points = 5;
+            highlight_color ="#FF00FF";
+            break;
+    }
+
+    document.getElementById('totaldateslogged').innerHTML = '<span style="background-color: ' + highlight_color + '">&nbsp;' + unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged' + ' - ' + day_points.toLocaleString() + ' pt' + ((day_points != 1) ? 's' : '') + '&nbsp;</span>';
+    document.getElementById('totaldatesreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totalwordcount').innerHTML = total_words.toLocaleString() + ' word' + ((total_words != 1) ? 's' : '');
+
+    // Display the number of minutes read.
+    var time_points = 0;
+    if (total_time < 30) {
+        time_points = 0;
+        highlight_color ="#FF0000";
+    } else if (total_time < 60) {
+        time_points = 1;
+        highlight_color ="#FFA500";
+    } else if (total_time < 90) {
+        time_points = 2;
+        highlight_color ="#FFFF00";
+    } else if (total_time < 120) {
+        time_points = 3;
+        highlight_color ="#00FF00";
+    } else if (total_time < 150) {
+        time_points = 4;
+        highlight_color ="#00FFFF";
+    } else {
+        time_points = 5;
+        highlight_color ="#FF00FF";
+    }
+
+    document.getElementById('totaltimespent').innerHTML = '<span style="background-color: ' + highlight_color + '">&nbsp;' + total_time.toLocaleString() + ' min' + ((total_time != 1) ? 's' : '') + ' - ' + time_points.toLocaleString() + ' pt' + ((time_points != 1) ? 's' : '') + '&nbsp;</span>';
+
+    total_points = day_points + time_points;
+    document.getElementById('totallogpoints').innerHTML = total_points.toLocaleString() + ' pt' + ((total_points != 1) ? 's' : '') + ' total&nbsp;';
+}
