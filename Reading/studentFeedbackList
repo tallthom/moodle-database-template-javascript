@@ -34,7 +34,6 @@ function studentFeedbackList()
 
         if (bs[i].innerHTML != "Still reading") {
             total_words += parseInt(wordcount[i].innerHTML);
-            wordcount[i].innerHTML = parseInt(wordcount[i].innerHTML).toLocaleString();
         }
         total_time += parseInt(timespent[i].innerHTML);
     }
