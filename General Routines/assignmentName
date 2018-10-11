@@ -4,13 +4,14 @@
 // the list view and the single view. It differs if the list is singular
 // or plural. The name is pulled from the Database Activity name set by
 // the user in Moodle.
-
 function assignmentName() {
     // Grab the assignment name from the document
     var the_assignment = document.title;
+    
     // Strip of the preceding course name
     the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
     var single_user = '';
+    var single_user_name ='';
 
     // Grab all usernames from the page.
     var users = document.getElementsByClassName('theUser');
@@ -31,6 +32,7 @@ function assignmentName() {
     // If the user is the same, report to who the assignment belongs
     if (is_same) {
         single_user = users[0].innerHTML;
+        single_user_name = users[0].childNodes[0].innerHTML;
         the_assignment += ' by ' + single_user;
 
         // Now blank out the user names in this screen since we
@@ -43,5 +45,7 @@ function assignmentName() {
 
     // Lastly, replace the assignment name with our improved version.
     document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
-    document.getElementById('usersignature').innerHTML = single_user;
+    var signature_line = '_______________';
+    for (var i=0; i<single_user_name.length; i++) { signature_line += '_'; }
+    document.getElementById('usersignature').innerHTML = 'Signed: ' + signature_line + '<br>' + single_user_name;
 }

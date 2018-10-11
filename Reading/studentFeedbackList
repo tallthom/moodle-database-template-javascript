@@ -1,0 +1,108 @@
+// Moodle Database Activity Javascript Template Function
+// Name: studentFeedbackList
+// Description: Gives students feedback on their current log.
+
+function studentFeedbackList()
+{
+    var dateadded = document.getElementsByClassName('dateadded');
+    var datereported = document.getElementsByClassName('datereported');
+    var wordcount = document.getElementsByClassName('bookwords');
+    var timespent = document.getElementsByClassName('timespent');
+    var booktitles = document.getElementsByClassName('booktitle');
+    var bs = document.getElementsByClassName('bookstatus');
+
+    // Determine unique days with the best possible score.
+    var unique_datesadded = new Set;
+    var unique_datesreported = new Set;
+    var unique_booksread = new Set;
+
+    var total_words = 0;
+    var total_time = 0;
+    var total_points = 0; // The total value of this log...
+
+    // Make unique sets of dates added and reported
+    // Also, count up totals
+    for (var i=0; i<dateadded.length; i++) {
+        unique_datesadded.add(dateadded[i].innerHTML);
+        unique_datesreported.add(datereported[i].innerHTML);
+
+        // Try to determine the number of unique titles read
+        if (bs[i].innerHTML == "Finished") {
+            var a_title = booktitles[i].innerHTML.toLowerCase();
+            unique_booksread.add(a_title.replace(/\s/g,''));
+        }
+
+        if (bs[i].innerHTML != "Still reading") {
+            total_words += parseInt(wordcount[i].innerHTML);
+            wordcount[i].innerHTML = parseInt(wordcount[i].innerHTML).toLocaleString();
+        }
+        total_time += parseInt(timespent[i].innerHTML);
+    }
+
+    // Points for days (and color)
+    var day_points = 0;
+    var highlight_color = "";
+    switch (unique_datesadded.size) {
+        case 1:
+            day_points = 0;
+            highlight_color ="#FF0000";
+            break;
+        case 2:
+            day_points = 2;
+            highlight_color ="#FFA500";
+            break;
+        case 3:
+            day_points = 3;
+            highlight_color ="#FFFF00";
+            break;
+        case 4:
+            day_points = 4;
+            highlight_color ="#00FF00";
+            break;
+        case 5:
+            day_points = 5;
+            highlight_color ="#00FFFF";
+            break;
+        default:
+            day_points = 5;
+            highlight_color ="#FF00FF";
+            break;
+    }
+
+    // Display the number of minutes read.
+    var time_points = 0;
+    if (total_time < 30) {
+        time_points = 0;
+        highlight_color ="#FF0000";
+    } else if (total_time < 60) {
+        time_points = 1;
+        highlight_color ="#FFA500";
+    } else if (total_time < 90) {
+        time_points = 2;
+        highlight_color ="#FFFF00";
+    } else if (total_time < 120) {
+        time_points = 3;
+        highlight_color ="#00FF00";
+    } else if (total_time < 150) {
+        time_points = 4;
+        highlight_color ="#00FFFF";
+    } else {
+        time_points = 5;
+        highlight_color ="#FF00FF";
+    }
+
+    total_points = day_points + time_points;
+
+    // Format the student feedback
+    var student_feedback = '<table width="100%" border="0"><tbody>';
+    student_feedback += '<tr><td width="100%" style="text-align: left; background-color: #ffff00; font-weight: bold">&nbsp;Log Feedback</td></tr>';
+
+    // How many books did they finish this week?
+    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You finished reading <b>' + unique_booksread.size + '</b> book' + ((unique_booksread.size != 1) ? 's' : '') + ' this week.</td></tr>';
+
+
+
+    student_feedback += '</tbody></table>';
+
+    document.getElementById('studentfeedback').innerHTML = student_feedback;
+}
