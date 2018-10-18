@@ -7,7 +7,7 @@
 function assignmentName() {
     // Grab the assignment name from the document
     var the_assignment = document.title;
-    
+
     // Strip of the preceding course name
     the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
     var single_user = '';
@@ -15,6 +15,7 @@ function assignmentName() {
 
     // Grab all usernames from the page.
     var users = document.getElementsByClassName('theUser');
+    var controls = document.getElementsByClassName('pagecontrols');
 
     // Find out if this is all one user or if it is many users
     var is_same = true;
@@ -35,17 +36,26 @@ function assignmentName() {
         single_user_name = users[0].childNodes[0].innerHTML;
         the_assignment += ' by ' + single_user;
 
-        // Now blank out the user names in this screen since we
+        // Now replace the user names in this screen since we
         // reported it in the assignment name line.
         for (var i = 0; i < users.length; i++) {
-            users[i].innerHTML = '';
+            users[i].innerHTML = controls[i].innerHTML;
+            controls[i].innerHTML = '';
         }
 
+        // Lastly, replace the assignment name with our improved version.
+        document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
+        var signature_line = '_______________';
+        for (var i=0; i<single_user_name.length; i++) { signature_line += '_'; }
+        document.getElementById('usersignature').innerHTML = 'Signed: ' + signature_line + '<br>' + single_user_name;
+    } else {
+        // It isn't the same, so remove the controls and just show user name
+        document.getElementById('columnControls').innerHTML = 'Student ID&nbsp;'
+        for (var i = 0; i < users.length; i++) {
+            var student_id = users[i].childNodes[0].innerHTML;
+            console.log('User Id: ' + student_id.substring(0,7)); // Stripping ID
+            users[i].innerHTML = student_id.substring(0,7);
+            controls[i].innerHTML = '';
+        }
     }
-
-    // Lastly, replace the assignment name with our improved version.
-    document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
-    var signature_line = '_______________';
-    for (var i=0; i<single_user_name.length; i++) { signature_line += '_'; }
-    document.getElementById('usersignature').innerHTML = 'Signed: ' + signature_line + '<br>' + single_user_name;
 }
