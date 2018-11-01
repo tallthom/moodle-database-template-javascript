@@ -18,7 +18,6 @@ function studentFeedbackList()
 
     var total_words = 0;
     var total_time = 0;
-    var total_points = 0; // The total value of this log...
 
     // Make unique sets of dates added and reported
     // Also, count up totals
@@ -32,74 +31,32 @@ function studentFeedbackList()
             unique_booksread.add(a_title.replace(/\s/g,''));
         }
 
-        if (bs[i].innerHTML != "Still reading") {
-            total_words += parseInt(wordcount[i].innerHTML);
+        if (bs[i].innerHTML == "Finished") {
+            var str = wordcount[i].innerHTML;
+            total_words += parseInt(str.replace(/,/g, ''), 10);
         }
         total_time += parseInt(timespent[i].innerHTML);
     }
 
-    // Points for days (and color)
-    var day_points = 0;
-    var highlight_color = "";
-    switch (unique_datesadded.size) {
-        case 1:
-            day_points = 0;
-            highlight_color ="#FF0000";
-            break;
-        case 2:
-            day_points = 2;
-            highlight_color ="#FFA500";
-            break;
-        case 3:
-            day_points = 3;
-            highlight_color ="#FFFF00";
-            break;
-        case 4:
-            day_points = 4;
-            highlight_color ="#00FF00";
-            break;
-        case 5:
-            day_points = 5;
-            highlight_color ="#00FFFF";
-            break;
-        default:
-            day_points = 5;
-            highlight_color ="#FF00FF";
-            break;
-    }
-
-    // Display the number of minutes read.
-    var time_points = 0;
-    if (total_time < 30) {
-        time_points = 0;
-        highlight_color ="#FF0000";
-    } else if (total_time < 60) {
-        time_points = 1;
-        highlight_color ="#FFA500";
-    } else if (total_time < 90) {
-        time_points = 2;
-        highlight_color ="#FFFF00";
-    } else if (total_time < 120) {
-        time_points = 3;
-        highlight_color ="#00FF00";
-    } else if (total_time < 150) {
-        time_points = 4;
-        highlight_color ="#00FFFF";
-    } else {
-        time_points = 5;
-        highlight_color ="#FF00FF";
-    }
-
-    total_points = day_points + time_points;
-
     // Format the student feedback
     var student_feedback = '<table width="100%" border="0"><tbody>';
-    student_feedback += '<tr><td width="100%" style="text-align: left; background-color: #ffff00; font-weight: bold">&nbsp;Log Feedback</td></tr>';
+    student_feedback += '<tr><td width="100%" style="text-align: left; background-color: #ffff00; font-weight: bold">----- Weekly ER Time Log Report/Feedback -----</td></tr>';
 
     // How many books did they finish this week?
-    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You finished reading <b>' + unique_booksread.size + '</b> book' + ((unique_booksread.size != 1) ? 's' : '') + ' this week.</td></tr>';
+    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You finished reading <b>' + unique_booksread.size + ' book' + ((unique_booksread.size != 1) ? 's' : '') + '</b> this week.</td></tr>';
 
+    // Did they log 5 days this week? If not remind them!
+    if (unique_datesadded.size<5) {
+        student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You reported reading <b>' + unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + '</b> this week. Set a goal to read <b>5 days</b> or more each week.</td></tr>';
+    }
 
+    // How many minutes per day did they read? Shoot for 30 minutes/day!
+    var mpd = total_time/unique_datesadded.size;
+    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You read an average of <b>' + mpd.toFixed(0) + ' minute' + ((mpd != 1) ? 's' : '') + ' per day</b> this week.' + ((mpd < 30) ?  ' Try to read at least <b>30 minutes</b> per day each week.' : '') + '</td></tr>';
+
+    // How many words per minute are they reading (roughly)
+    var wpm = total_words/total_time;
+    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You read about <b>' + wpm.toFixed(1) + ' word' + ((wpm != 1) ? 's' : '') + ' per minute</b> this week.</td></tr>';
 
     student_feedback += '</tbody></table>';
 

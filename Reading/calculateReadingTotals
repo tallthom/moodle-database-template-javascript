@@ -25,7 +25,7 @@ function calculateReadingTotals()
         unique_datesadded.add(dateadded[i].innerHTML);
         unique_datesreported.add(datereported[i].innerHTML);
 
-        if (bs[i].innerHTML != "Still reading") {
+        if (bs[i].innerHTML == "Finished") {
             total_words += parseInt(wordcount[i].innerHTML);
         }
         wordcount[i].innerHTML = parseInt(wordcount[i].innerHTML).toLocaleString();

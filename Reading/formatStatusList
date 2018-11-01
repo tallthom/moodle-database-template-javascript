@@ -1,6 +1,6 @@
 // Moodle Database Activity Javascript Template Function
 // Name: formatStatusList
-// Description: Hides totals for "still reading"
+// Description: Hides totals for everything except "Finished" books
 
 function formatStatusList() {
     // Grab all URL and all Titles of posts
@@ -9,7 +9,7 @@ function formatStatusList() {
 
     // Loop through and process post/comment.
     for (var i = 0; i < bs.length; i++) {
-        if (bs[i].innerHTML == "Still reading") {
+        if (bs[i].innerHTML != "Finished") {
             words[i].innerHTML = '';
         }
     }
