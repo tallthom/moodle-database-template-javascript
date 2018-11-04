@@ -1,0 +1,22 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatGoalStatusList
+// Description: Checks daily totals, and reports goal met or not!
+
+function formatGoalStatusList() {
+    var dg = parseInt(document.getElementById('crgoal').innerHTML);
+    if (dg == 0) {
+        dg = 50; // Default for WordEngine
+    }
+
+    // Grab all daily CR and all goal status
+    var cr = document.getElementsByClassName('correctresponses');
+    var gs = document.getElementsByClassName('goalstatus');
+
+    // Loop through and check daily CR goal
+    for (var i = 0; i < cr.length; i++) {
+        the_cr = parseInt(cr[i].innerHTML);
+        if (the_cr>=dg) {
+            gs[i].innerHTML = 'Daily (+' + parseInt(the_cr-dg) + ')';
+        }
+    }
+}

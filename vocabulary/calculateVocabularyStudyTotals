@@ -1,0 +1,116 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateVocabularyStudyTotals
+// Description: Reviews the logs and totals them based
+// on the rubric defined here.
+
+function calculateVocabularyStudyTotals() {
+    // Find the daily goal for this activity
+    var dg = parseInt(document.getElementById('crgoal').innerHTML);
+    if (dg == 0) {
+        dg=50; // Default for WordEngine
+    }
+    document.getElementById('crgoal').innerHTML = 'Goal (' + dg + ' CR)';
+
+    var dateadded = document.getElementsByClassName('dateadded');
+    var datereported = document.getElementsByClassName('datereported');
+    var correctresponses = document.getElementsByClassName('correctresponses');
+    var timespent = document.getElementsByClassName('timespent');
+
+    // Determine unique days with the best possible score.
+    var unique_datesadded = new Set;
+    var unique_datesreported = new Set;
+
+    var total_cr = 0;
+    var total_time = 0;
+    var goal_points = 0; // Total number of times the student hit the goal of 50 cr/day
+    var total_points = 0; // The total value of this log...
+
+    // Make unique sets of dates added and reported
+    // Also, count up totals
+    for (var i=0; i<dateadded.length; i++) {
+        unique_datesadded.add(dateadded[i].innerHTML);
+        unique_datesreported.add(datereported[i].innerHTML);
+
+        day_cr = parseInt(correctresponses[i].innerHTML); // Grab the day's reported CR
+        correctresponses[i].innerHTML = day_cr.toLocaleString(); // Add formatting if it is more than 999
+
+        if (day_cr>=dg) {
+            goal_points += 1; // Add one for each day they met their goal
+        }
+
+        total_cr += day_cr; // Keep the running CR total
+        total_time += parseInt(timespent[i].innerHTML); // Keep the running time total
+    }
+
+    // Points for days (and color)
+    var day_points = 0;
+    var highlight_color = "";
+    switch (unique_datesadded.size) {
+        case 1:
+            day_points = 0;
+            highlight_color ="#FF0000";
+            break;
+        case 2:
+            day_points = 2;
+            highlight_color ="#FFA500";
+            break;
+        case 3:
+            day_points = 3;
+            highlight_color ="#FFFF00";
+            break;
+        case 4:
+            day_points = 4;
+            highlight_color ="#00FF00";
+            break;
+        case 5:
+            day_points = 5;
+            highlight_color ="#00FFFF";
+            break;
+        default:
+            day_points = 5;
+            highlight_color ="#FF00FF";
+            break;
+    }
+
+    // Match the days the goal was met with the total number of days
+    if (goal_points>day_points) {
+        goal_points = day_points;
+    }
+
+    document.getElementById('totaldateslogged').innerHTML = '<span style="background-color: ' + highlight_color + '">&nbsp;' + unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged' + ' - ' + day_points.toLocaleString() + ' pt' + ((day_points != 1) ? 's' : '') + '&nbsp;</span>';
+    document.getElementById('totaldatesreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
+
+    // Display the number of minutes read.
+    var time_points = 0;
+    if (total_time < 15) {
+        time_points = 0;
+        highlight_color ="#FF0000";
+    } else if (total_time < 30) {
+        time_points = 1;
+        highlight_color ="#FFA500";
+    } else if (total_time < 45) {
+        time_points = 2;
+        highlight_color ="#FFFF00";
+    } else if (total_time < 60) {
+        time_points = 3;
+        highlight_color ="#00FF00";
+    } else if (total_time < 75) {
+        time_points = 4;
+        highlight_color ="#00FFFF";
+    } else {
+        time_points = 5;
+        highlight_color ="#FF00FF";
+    }
+
+    document.getElementById('totaltimespent').innerHTML = '<span style="background-color: ' + highlight_color + '">&nbsp;' + total_time.toLocaleString() + ' min' + ((total_time != 1) ? 's' : '') + '&nbsp;</span>';
+    document.getElementById('totalcorrectresponses').innerHTML = total_cr.toLocaleString() + ' CR' + ((total_cr != 1) ? 's' : '');
+
+    // Display the total CR and the Weekly Goal Hit (if they hit)
+    var wgt = ''; // Text to display for Weekly Goal
+    var wg = dg*5; // 5 days of DG is the WG
+    wgt = 'Weekly (' + ((total_cr>=wg) ? '+' : '') + parseInt(total_cr-wg) + ')';
+    document.getElementById('totalweeklygoal').innerHTML = wgt;
+
+    total_points = day_points + goal_points;
+    document.getElementById('totallogpoints').innerHTML = total_points.toLocaleString() + ' pt' + ((total_points != 1) ? 's' : '') + ' total&nbsp;';
+}
