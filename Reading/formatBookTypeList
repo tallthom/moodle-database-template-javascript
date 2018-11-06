@@ -9,6 +9,9 @@ function formatBookTypeList() {
     // Loop through and process post/comment.
     for (var i = 0; i < pd.length; i++) {
         var shorten = pd[i].innerHTML;
+        if (shorten == '') {
+            shorten = 'Paper';
+        }
         pd[i].innerHTML = shorten.substring(0,1);
     }
 }

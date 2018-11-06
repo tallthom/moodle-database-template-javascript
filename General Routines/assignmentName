@@ -43,19 +43,22 @@ function assignmentName() {
             controls[i].innerHTML = '';
         }
 
-        // Lastly, replace the assignment name with our improved version.
-        document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
+        // Make the signature line as long as the name and then some
         var signature_line = '_______________';
         for (var i=0; i<single_user_name.length; i++) { signature_line += '_'; }
         document.getElementById('usersignature').innerHTML = 'Signed: ' + signature_line + '<br>' + single_user_name;
     } else {
         // It isn't the same, so remove the controls and just show user name
-        document.getElementById('columnControls').innerHTML = 'Student ID | Controls&nbsp;'
+//        document.getElementById('columnControls').innerHTML = 'Student ID | Controls&nbsp;'
+        document.getElementById('columnControls').innerHTML = 'Student ID&nbsp;'
         for (var i = 0; i < users.length; i++) {
             var student_id = users[i].childNodes[0].innerHTML;
-            console.log('User Id: ' + student_id.substring(0,7)); // Stripping ID
-            users[i].innerHTML = student_id.substring(0,7) + ' | ' + controls[i].innerHTML;
+//            console.log('User Id: ' + student_id.substring(0,7)); // Stripping ID
+//            users[i].innerHTML = student_id.substring(0,7) + ' | ' + controls[i].innerHTML;
+            users[i].innerHTML = student_id.substring(0,7);
             controls[i].innerHTML = '';
         }
     }
+    // Lastly, replace the assignment name with our improved version.
+    document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
 }

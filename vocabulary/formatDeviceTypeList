@@ -9,6 +9,9 @@ function formatDeviceTypeList() {
     // Loop through and process post/comment.
     for (var i = 0; i < pd.length; i++) {
         var shorten = pd[i].innerHTML;
+        if (shorten == '') {
+            shorten = 'Mobile';
+        }
         pd[i].innerHTML = shorten.substring(0,1);
     }
 }
