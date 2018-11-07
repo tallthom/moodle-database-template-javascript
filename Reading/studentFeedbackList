@@ -38,9 +38,13 @@ function studentFeedbackList()
         total_time += parseInt(timespent[i].innerHTML);
     }
 
+    // Grab the assignment name from the document
+    var the_assignment = document.title;
+    the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
+
     // Format the student feedback
     var student_feedback = '<table width="100%" border="0"><tbody>';
-    student_feedback += '<tr><td width="100%" style="text-align: left; background-color: #ffff00; font-weight: bold">----- Weekly ER Time Log Report/Feedback -----</td></tr>';
+    student_feedback += '<tr><td width="100%" style="text-align: left; background-color: #ffff00; font-weight: bold">----- ' + the_assignment + ' Feedback -----</td></tr>';
 
     // How many books did they finish this week?
     student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You finished reading <b>' + unique_booksread.size + ' book' + ((unique_booksread.size != 1) ? 's' : '') + '</b> this week.</td></tr>';
@@ -51,12 +55,12 @@ function studentFeedbackList()
     }
 
     // How many minutes per day did they read? Shoot for 30 minutes/day!
-    var mpd = total_time/unique_datesadded.size;
-    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You read an average of <b>' + mpd.toFixed(0) + ' minute' + ((mpd != 1) ? 's' : '') + ' per day</b> this week.' + ((mpd < 30) ?  ' Try to read at least <b>30 minutes</b> per day each week.' : '') + '</td></tr>';
+    var mpd = parseInt(total_time/unique_datesadded.size);
+    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You read an average of <b>' + mpd + ' minute' + ((mpd != 1) ? 's' : '') + ' per day</b> this week.' + ((mpd < 30) ?  ' Try to read at least <b>30 minutes</b> per day each week.' : '') + '</td></tr>';
 
     // How many words per minute are they reading (roughly)
-    var wpm = total_words/total_time;
-    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You read about <b>' + wpm.toFixed(1) + ' word' + ((wpm != 1) ? 's' : '') + ' per minute</b> this week.</td></tr>';
+    var wpm = parseInt(total_words/total_time);
+    student_feedback += '<tr><td width="100%" style="text-align: left;">&nbsp;You read about <b>' + wpm + ' word' + ((wpm != 1) ? 's' : '') + ' per minute</b> this week.</td></tr>';
 
     student_feedback += '</tbody></table>';
 
