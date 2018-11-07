@@ -22,7 +22,8 @@ function calculateVocabularyStudyTotals() {
 
     var total_cr = 0;
     var total_time = 0;
-    var goal_points = 0; // Total number of times the student hit the goal of 50 cr/day
+    var goal_points = 0; // Points for hitting the daily goal
+    var goal_hits = 0; // Number of times goal was hit
     var total_points = 0; // The total value of this log...
 
     // Make unique sets of dates added and reported
@@ -35,7 +36,7 @@ function calculateVocabularyStudyTotals() {
         correctresponses[i].innerHTML = day_cr.toLocaleString(); // Add formatting if it is more than 999
 
         if (day_cr>=dg) {
-            goal_points += 1; // Add one for each day they met their goal
+            goal_hits += 1; //number of hits
         }
 
         total_cr += day_cr; // Keep the running CR total
@@ -73,8 +74,13 @@ function calculateVocabularyStudyTotals() {
     }
 
     // Match the days the goal was met with the total number of days
-    if (goal_points>day_points) {
-        goal_points = day_points;
+    // And calculate the goal hit points
+    if (day_points>0) {
+        if (goal_hits>day_points) {
+            goal_points = day_points;
+        } else {
+            goal_points = goal_hits;
+        }
     }
 
     document.getElementById('totaldateslogged').innerHTML = '<span style="background-color: ' + highlight_color + '">&nbsp;' + unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged' + ' - ' + day_points.toLocaleString() + ' pt' + ((day_points != 1) ? 's' : '') + '&nbsp;</span>';
@@ -106,10 +112,8 @@ function calculateVocabularyStudyTotals() {
     document.getElementById('totalcorrectresponses').innerHTML = total_cr.toLocaleString() + ' CR' + ((total_cr != 1) ? 's' : '');
 
     // Display the total CR and the Weekly Goal Hit (if they hit)
-    var wgt = ''; // Text to display for Weekly Goal
-    var wg = dg*5; // 5 days of DG is the WG
-    wgt = 'Weekly (' + ((total_cr>=wg) ? '+' : '') + parseInt(total_cr-wg) + ')';
-    document.getElementById('totalweeklygoal').innerHTML = wgt;
+    var dgh = goal_hits + ' Goal Hits - ' + goal_points + ' pt' + ((goal_points != 1) ? 's' : ''); // Text to display for daily goal hits
+    document.getElementById('totalweeklygoal').innerHTML = dgh;
 
     total_points = day_points + goal_points;
     document.getElementById('totallogpoints').innerHTML = total_points.toLocaleString() + ' pt' + ((total_points != 1) ? 's' : '') + ' total&nbsp;';
