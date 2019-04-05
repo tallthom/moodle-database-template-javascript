@@ -12,7 +12,7 @@ function calculateScores()
     var dateadded = document.getElementsByClassName('dateadded');
     var datereported = document.getElementsByClassName('datereported');
     var wordcount = document.getElementsByClassName('wordcount');
-    var multmedia = document.getElementsByClassName('multimedia');
+    var multimedia = document.getElementsByClassName('multimedia');
     var timespent = document.getElementsByClassName('timespent');
     var postpoints = document.getElementsByClassName('postpoints');
 
@@ -20,10 +20,19 @@ function calculateScores()
     for (var i=0; i<postcomment.length; i++) {
         if (postcomment[i].innerHTML != 'C') {
             var words = parseInt(wordcount[i].innerHTML);
+            var media = multimedia[i].innerHTML;
             var points = 0;
-            if (words > 50) {points = points + 1; }
-            if (words > 100) {points = points + 1; }
-            if (words > 150) {points = points + 1; }
+            if (words > 100) { points = points + 10; }
+            if (words > 150) { points = points + 10; }
+            if (words > 200) { points = points + 5; }
+            if (media != '0') { points = points + 5; }
+            postpoints[i].innerHTML = points;
+        }
+        if (postcomment[i].innerHTML == 'C') {
+            var words = parseInt(wordcount[i].innerHTML);
+            var points = 0;
+            if (words > 25) { points = points + 1; }
+            if (words > 50) { points = points + 1; }
             postpoints[i].innerHTML = points;
         }
     }

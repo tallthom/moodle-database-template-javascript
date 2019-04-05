@@ -11,6 +11,7 @@ function calculateCommentTotals()
     var wordcount = document.getElementsByClassName('wordcount');
     var multimedia = document.getElementsByClassName('multimedia');
     var timespent = document.getElementsByClassName('timespent');
+    var postpoints = document.getElementsByClassName('postpoints');
 
     // Determine unique days with the best possible score.
     var unique_datesadded = new Set;
@@ -18,6 +19,7 @@ function calculateCommentTotals()
 
     var total_words = 0;
     var total_time = 0;
+    var total_points = 0;
 
     // Make unique sets of dates, multimedia
     // Also, count up totals
@@ -29,12 +31,14 @@ function calculateCommentTotals()
 
             total_words += parseInt(wordcount[i].innerHTML);
             total_time += parseInt(timespent[i].innerHTML);
+            total_points += parseInt(postpoints[i].innerHTML);
         }
     }
+    if (total_points > 10) { total_points = 10; } // max 10 extra points
 
     document.getElementById('totalcommentlogged').innerHTML = unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged';
     document.getElementById('totalcommentreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
     document.getElementById('totalcommentwordcount').innerHTML = total_words.toLocaleString() + ' word' + ((total_words != 1) ? 's' : '');
     document.getElementById('totalcommenttimespent').innerHTML = total_time.toLocaleString() + ' minute' + ((total_time != 1) ? 's' : '');
-    document.getElementById('totalcommentlogpoints').innerHTML = ''; // Blank for now
+    document.getElementById('totalcommentlogpoints').innerHTML = total_points.toLocaleString() + ' point' + ((total_points != 1) ? 's' : '');
 }
