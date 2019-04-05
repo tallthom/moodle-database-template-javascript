@@ -41,23 +41,23 @@ function calculateReadingTotals()
             highlight_color ="#FF0000";
             break;
         case 2:
-            day_points = 2;
+            day_points = 20;
             highlight_color ="#FFA500";
             break;
         case 3:
-            day_points = 3;
+            day_points = 30;
             highlight_color ="#FFFF00";
             break;
         case 4:
-            day_points = 4;
+            day_points = 40;
             highlight_color ="#00FF00";
             break;
         case 5:
-            day_points = 5;
+            day_points = 50;
             highlight_color ="#00FFFF";
             break;
         default:
-            day_points = 5;
+            day_points = 50;
             highlight_color ="#FF00FF";
             break;
     }
@@ -72,19 +72,19 @@ function calculateReadingTotals()
         time_points = 0;
         highlight_color ="#FF0000";
     } else if (total_time < 60) {
-        time_points = 1;
+        time_points = 10;
         highlight_color ="#FFA500";
     } else if (total_time < 90) {
-        time_points = 2;
+        time_points = 20;
         highlight_color ="#FFFF00";
     } else if (total_time < 120) {
-        time_points = 3;
+        time_points = 30;
         highlight_color ="#00FF00";
     } else if (total_time < 150) {
-        time_points = 4;
+        time_points = 40;
         highlight_color ="#00FFFF";
     } else {
-        time_points = 5;
+        time_points = 50;
         highlight_color ="#FF00FF";
     }
 
