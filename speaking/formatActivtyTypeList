@@ -1,0 +1,17 @@
+// Moodle Database Activity Javascript Template Function
+// Name: formatActivityTypeList
+// Description: Changes the words Activity Type to 3 characters
+
+function formatActivityTypeList() {
+    // Grab all URL and all Titles of posts
+    var pd = document.getElementsByClassName('studytype');
+
+    // Loop through and process post/comment.
+    for (var i = 0; i < pd.length; i++) {
+        var shorten = pd[i].innerHTML;
+        if (shorten == '') {
+            shorten = 'WLS - Watch/Learn/Speak';
+        }
+        pd[i].innerHTML = shorten.substring(0,3);
+    }
+}
