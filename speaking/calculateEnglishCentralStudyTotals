@@ -27,10 +27,16 @@ function calculateEnglishCentralStudyTotals() {
         unique_datesadded.add(dateadded[i].innerHTML);
         unique_datesreported.add(datereported[i].innerHTML);
 
-        day_vw = parseInt(videoswatched[i].innerHTML); // Grab the day's reported VW
-        videoswatched[i].innerHTML = day_vw.toLocaleString(); // Add formatting if it is more than 999
+        // Check for GoLive or W/L/S -- video counts
+        if (studytype[i].innerHTML == "GOL") {
+           did_go_live += 1;
+           videoswatched[i].innerHTML = '';
+        } else {
+           day_vw = parseInt(videoswatched[i].innerHTML); // Grab the day's reported VW
+           videoswatched[i].innerHTML = day_vw.toLocaleString(); // Add formatting if it is more than 999
+           total_vw += day_vw; // Keep the running VW total
+        }
 
-        total_vw += day_vw; // Keep the running CR total
         total_time += parseInt(timespent[i].innerHTML); // Keep the running time total
 
         var the_pct = parseInt(percentcompleted[i].innerHTML);
@@ -93,10 +99,10 @@ function calculateEnglishCentralStudyTotals() {
     }
 
     document.getElementById('totaltimespent').innerHTML = '<span style="background-color: ' + highlight_color + '">&nbsp;' + total_time.toLocaleString() + ' min' + ((total_time != 1) ? 's' : '') + '&nbsp;</span>';
-    document.getElementById('totalvideoswatched').innerHTML = total_vw.toLocaleString() + ' CR' + ((total_vw != 1) ? 's' : '');
+    document.getElementById('totalvideoswatched').innerHTML = total_vw.toLocaleString() + ' VW' + ((total_vw != 1) ? 's' : '');
 
     // Display the highest percentage
-    document.getElementById('totalpercentcompleted').innerHTML = max_pct + '% Completed';
+    document.getElementById('totalpercentcompleted').innerHTML = max_pct + '% done';
 
     if (unique_datesadded.size >= 3) {
        if (total_time >= 45) {
