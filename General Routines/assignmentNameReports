@@ -1,0 +1,44 @@
+// Moodle Database Activity Javascript Template Function
+// Name: assignmentName
+// Description: This script formats the assignment name at the top of both
+// the list view and the single view. It differs if the list is singular
+// or plural. The name is pulled from the Database Activity name set by
+// the user in Moodle.
+function assignmentName() {
+    // Grab the assignment name from the document
+    var the_assignment = document.title;
+
+    // Strip of the preceding course name
+    the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
+    var single_user = '';
+    var single_user_name ='';
+
+    // Grab all usernames from the page.
+    var users = document.getElementsByClassName('theUser');
+
+    // Find out if this is all one user or if it is many users
+    var is_same = true;
+    for (var i = 0; i < users.length-1; i++) {
+        if (users[i].innerHTML !== users[i+1].innerHTML) {
+            is_same = false;
+        }
+    }
+
+    // Add an "s" to the name of the assignment since there is more than one.
+    if (users.length > 1) {
+        the_assignment += 's';
+    }
+
+    // If the user is the same, report to who the assignment belongs
+    if (is_same) {
+        single_user = users[0].innerHTML;
+        single_user_name = users[0].childNodes[0].innerHTML;
+
+        // Make the signature line as long as the name and then some
+        var signature_line = '_______________';
+        for (var i=0; i<single_user_name.length; i++) { signature_line += '_'; }
+        document.getElementById('usersignature').innerHTML = 'Signed: ' + signature_line + '<br>' + single_user_name;
+    }
+    // Lastly, replace the assignment name with our improved version.
+    document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
+}
