@@ -1,0 +1,31 @@
+function formatNumbers() {
+    var head_words = document.getElementsByClassName('theHeadWords');
+    var total_words = document.getElementsByClassName('theTotalWords');
+     var words = 0;
+     for (i = 0; i < head_words.length; i++) {
+         words = parseInt(head_words[i].innerHTML);
+         head_words[i].innerHTML = words.toLocaleString();
+         words = parseInt(total_words[i].innerHTML);
+         total_words[i].innerHTML = words.toLocaleString();
+    }
+}
+
+function formatJustNumbers() {
+    var head_words = parseInt(document.getElementById('headWords').innerHTML);
+    document.getElementById('headWords').innerHTML = head_words.toLocaleString();
+    var total_words = parseInt(document.getElementById('totalWords').innerHTML);
+    document.getElementById('totalWords').innerHTML = total_words.toLocaleString();
+    var time_spent = parseInt(document.getElementById('timeSpent').innerHTML);
+    document.getElementById('timeSpent').innerHTML = time_spent + ' minutes';
+    var wpm = total_words / time_spent;
+    document.getElementById('wordsPerMinute').innerHTML = wpm.toFixed(1) + ' words per minute';
+}
+
+function validateQuiz() {
+    var the_quiz = document.getElementById('quizPassed').innerHTML;
+    if (the_quiz == "No") {
+       document.getElementById('quizPassed').innerHTML = '<span style="background-color: #FF0000;">&nbsp;<b>Quiz Passed: </b> No&nbsp;</span>';
+    } else {
+        document.getElementById('quizPassed').innerHTML = '&nbsp;<b>Quiz Passed: </b> Yes&nbsp;';
+    }
+}
