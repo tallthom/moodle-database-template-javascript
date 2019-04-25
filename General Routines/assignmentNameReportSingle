@@ -1,10 +1,9 @@
 // Moodle Database Activity Javascript Template Function
-// Name: assignmentName
-// Description: This script formats the assignment name at the top of both
-// the list view and the single view. It differs if the list is singular
-// or plural. The name is pulled from the Database Activity name set by
-// the user in Moodle.
-function assignmentName() {
+// Name: assignmentNameReportSingle
+// Description: Format assignment name for a report single view.
+// The name is pulled from the Database Activity name set in Moodle.
+// This also includes a signature line.
+function assignmentNameReportSingle() {
     // Grab the assignment name from the document
     var the_assignment = document.title;
 

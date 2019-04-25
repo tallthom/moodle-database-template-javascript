@@ -1,0 +1,37 @@
+// Moodle Database Activity Javascript Template Function
+// Name: assignmentNameReportList
+// Description: Format assignment name for a report list view.
+// The name is pulled from the Database Activity name set in Moodle.
+function assignmentNameReportList() {
+    // Grab the assignment name from the document
+    var the_assignment = document.title;
+
+    // Strip of the preceding course name
+    the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
+    var single_user = '';
+    var single_user_name ='';
+
+    // Grab all usernames from the page.
+    var users = document.getElementsByClassName('theUser');
+
+    // Find out if this is all one user or if it is many users
+    var is_same = true;
+    for (var i = 0; i < users.length-1; i++) {
+        if (users[i].innerHTML !== users[i+1].innerHTML) {
+            is_same = false;
+        }
+    }
+
+    // Add an "s" to the name of the assignment since there is more than one.
+    if (users.length > 1) {
+        the_assignment += 's';
+    }
+
+    // If the user is the same, report to who the assignment belongs
+    if (is_same) {
+        single_user = users[0].innerHTML;
+        single_user_name = users[0].childNodes[0].innerHTML;
+    }
+    // Lastly, replace the assignment name with our improved version.
+    document.getElementById('assignmentplaceholder').innerHTML = the_assignment;
+}

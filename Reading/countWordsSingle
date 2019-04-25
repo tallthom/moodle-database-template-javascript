@@ -1,0 +1,20 @@
+// Moodle Database Activity Javascript Template Function
+// Name: countWordsSingle
+// Description: Counts the number of words on a single entry and replaces
+// the text in the title with the word counts.
+function countWordsSingle() {
+   var the_headings = document.getElementsByClassName('countWordsHeading');
+   var the_text = document.getElementsByClassName('countWordsArea');
+
+   var the_heading = '';
+   var the_words = '';
+   var count = 0;
+   for (var i = 0; i < the_headings.length; i++) {
+      the_heading = the_headings[i].innerHTML;
+      the_words = the_text[i].innerHTML;
+      count = countWords(the_words);
+
+      the_heading += ' (' + parseInt(count).toLocaleString() + ' words) ';
+      the_headings[i].innerHTML = the_heading;
+   }
+}

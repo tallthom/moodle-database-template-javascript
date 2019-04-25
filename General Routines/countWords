@@ -1,45 +1,9 @@
-function countWords(s){
+// Moodle Database Activity Javascript Template Function
+// Name: countWords
+// Description: Counts the number of words in a block of text and returns the number
+function countWords(s) {
     s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
     s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
     s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
     return s.split(' ').length;
-}
-
-function countingWords() {
-   var the_words = document.getElementById('impactArea').innerHTML;
-   var count = countWords(the_words);
-   document.getElementById('impactWordCount').innerHTML = 'Impact (' + count + ' words)';
-   if (count <= 100) {
-      document.getElementById('impactArea').innerHTML = '<span style="background-color: #FF0000;"><b><i>Please write more than 100 words.</i></b></span><br>' + the_words;
-   }
-   the_words = document.getElementById('answerArea').innerHTML;
-   count = countWords(the_words);
-   document.getElementById('answerWordCount').innerHTML = 'Question/Answer (' + count + ' words)';
-   if (count <= 100) {
-      document.getElementById('answerArea').innerHTML = '<span style="background-color: #FF0000;"><b><i>Please write more than 100 words.</i></b></span><br>' + the_words;
-   }
-}
-
-function countingJustWords() {
-      var the_words = document.getElementsByClassName('theImpactArea');
-      var count = 0;
-      for (i = 0; i < the_words.length; i++) {
-         count = countWords(the_words[i].innerHTML);
-         if (count <= 100) {
-                the_words[i].innerHTML = '<b>*</b>' + count;
-         } else {
-            the_words[i].innerHTML = count;
-         }
-      }
-
-      the_words = document.getElementsByClassName('theAnswerArea');
-      count = 0;
-      for (i = 0; i < the_words.length; i++) {
-         count = countWords(the_words[i].innerHTML);
-         if (count <= 100) {
-                the_words[i].innerHTML = '<b>*</b>' + count;
-         } else {
-            the_words[i].innerHTML = count;
-         }
-      }
 }
