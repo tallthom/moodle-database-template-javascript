@@ -34,7 +34,7 @@ function calculateCommentTotals()
             total_points += parseInt(postpoints[i].innerHTML);
         }
     }
-    if (total_points > 40) { total_points = 40; } // max 10 extra points
+    if (total_points > 40) { total_points = 40; } // max 40 points
 
     document.getElementById('totalcommentlogged').innerHTML = unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged';
     document.getElementById('totalcommentreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';

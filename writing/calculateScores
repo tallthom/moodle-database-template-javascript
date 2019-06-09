@@ -31,8 +31,8 @@ function calculateScores()
         if (postcomment[i].innerHTML == 'C') {
             var words = parseInt(wordcount[i].innerHTML);
             var points = 0;
-            if (words > 25) { points = points + 1; }
-            if (words > 50) { points = points + 1; }
+            if (words > 25) { points = points + 2; }
+            if (words > 50) { points = points + 2; }
             postpoints[i].innerHTML = points;
         }
     }
