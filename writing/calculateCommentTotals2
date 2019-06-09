@@ -21,19 +21,39 @@ function calculateCommentTotals()
     var total_time = 0;
     var total_points = 0;
 
+    // Made an assumption that comments are logged chronologically
+    var day_points = 0;
+    var curr_points = 0;
+    var prev_date = '';
+    var curr_date = '';
+
     // Make unique sets of dates, multimedia
     // Also, count up totals
     for (var i=0; i<postcomment.length; i++) {
         if (postcomment[i].innerHTML == 'C') {
-            unique_datesadded.add(dateadded[i].innerHTML);
+            curr_date = dateadded[i].innerHTML;
+            curr_points = parseInt(postpoints[i].innerHTML);
+
+            if (prev_date != curr_date) {
+               if (day_points > 8) { day_points = 8; }
+               total_points += day_points;
+               day_points = curr_points; // Start a new day total
+               prev_date = curr_date;
+            } else {
+               day_points += curr_points; // Add to daily total
+            }
+
+            unique_datesadded.add(curr_date);
             unique_datesreported.add(datereported[i].innerHTML);
             multimedia[i].innerHTML = ''; // Blank out MM since its a comment
 
             total_words += parseInt(wordcount[i].innerHTML);
             total_time += parseInt(timespent[i].innerHTML);
-            total_points += parseInt(postpoints[i].innerHTML);
+
         }
     }
+    if (day_points > 8) { day_points = 8; }
+    total_points += day_points; // Add the last day's points
     if (total_points > 40) { total_points = 40; } // max 40 points
 
     document.getElementById('totalcommentlogged').innerHTML = unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged';
