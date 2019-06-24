@@ -8,11 +8,19 @@
 
 function printDiv(divName) {
      var printContents = document.getElementsByClassName(divName);
+     var today = new Date();
+     var date = today.getFullYear() + '-' + today.toLocaleString('en-us', {month: 'short'}) +  '-' + today.getDate();
+     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+     var dateTime = date + ' ' + time;
+
      var printMe = "";
      for (i = 0; i < printContents.length; i++) {
           printMe += printContents[i].innerHTML;
      }
-     printMe += '<br>LANG=' + document.documentElement.lang;
+
+     printMe += '<br>Printed On: ' + dateTime;
+     printMe += '<br>Language: ' + document.documentElement.lang;
+
      var originalContents = document.body.innerHTML;
      document.body.innerHTML = printMe;
      window.print();
