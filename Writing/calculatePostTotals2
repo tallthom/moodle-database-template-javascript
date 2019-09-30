@@ -1,0 +1,78 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculatePostTotals
+// Description: Reviews the posts and totals them based
+// on the rubric defined here.
+
+function calculatePostTotals()
+{
+    var postcomment = document.getElementsByClassName('postcomment');
+    var dateadded = document.getElementsByClassName('dateadded');
+    var datereported = document.getElementsByClassName('datereported');
+    var wordcount = document.getElementsByClassName('wordcount');
+    var multimedia = document.getElementsByClassName('multimedia');
+    var timespent = document.getElementsByClassName('timespent');
+    var postpoints = document.getElementsByClassName('postpoints');
+
+    // Determine unique days with the best possible score.
+    var unique_datesadded = new Set;
+    var unique_datesreported = new Set;
+    var multimedia_reported = new Set;
+
+    var totals_points = [];   // Stores the scores of the two best posts of the week
+    var totals_dates = [];    // Stores the dates of the two best posts of the week
+
+    var total_words = 0;
+    var total_multimedia = 0;
+    var total_time = 0;
+    var total_points = 0;
+
+    // Make unique sets of dates, multimedia
+    // Also, count up totals
+    for (var i=0; i<postcomment.length; i++) {
+        if (postcomment[i].innerHTML != 'C') {
+            // Fill the points array at first (but only 1 entry max)
+            if (!unique_datesadded.has(dateadded[i].innerHTML)) {
+                if (totals_points.length < 1) {
+                    totals_dates.push(dateadded[i].innerHTML); // Add the date
+                    totals_points.push(parseInt(postpoints[i].innerHTML)); // Add the score
+                } else {
+                    // Check to see if this new date is better than the old
+                    for (j=0; j<totals_dates.length; j++) {
+                        if (totals_points[j] < parseInt(postpoints[i].innerHTML)) {
+                            totals_points[j] = parseInt(postpoints[i].innerHTML);
+                            totals_dates[j] = dateadded[i].innerHTML; //Replace this date
+                        }
+                    }
+                }
+            } else { // Check to see if we have more points to add
+                for (j=0; j<totals_dates.length; j++) {
+                    if (totals_dates[j] == dateadded[i].innerHTML) {
+                       // If we have this date already, take a better score if possible
+                       if (totals_points[j] < parseInt(postpoints[i].innerHTML)) {
+                           totals_points[j] = parseInt(postpoints[i].innerHTML);
+                       }
+                    }
+                }
+            }
+            unique_datesadded.add(dateadded[i].innerHTML);
+            unique_datesreported.add(datereported[i].innerHTML);
+            multimedia_reported.add(multimedia[i].innerHTML);
+
+            total_words += parseInt(wordcount[i].innerHTML);
+            total_multimedia += parseInt(multimedia[i].innerHTML.replace('+',''));
+            total_time += parseInt(timespent[i].innerHTML);
+        }
+    }
+
+    // Sum the total for this log
+    for (i=0; i<totals_points.length; i++) {
+        total_points += totals_points[i]; // Sum up the best scores
+    }
+
+    document.getElementById('totalpostlogged').innerHTML = unique_datesadded.size + ' day' + ((unique_datesadded.size != 1) ? 's' : '') + ' logged';
+    document.getElementById('totalpostreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totalpostwordcount').innerHTML = total_words.toLocaleString() + ' word' + ((total_words != 1) ? 's' : '');
+    document.getElementById('totalposttimespent').innerHTML = total_time.toLocaleString() + ' minute' + ((total_time != 1) ? 's' : '');
+    document.getElementById('totalpostlogpoints').innerHTML = total_points.toLocaleString() + ' point' + ((total_points != 1) ? 's' : '');
+
+}
