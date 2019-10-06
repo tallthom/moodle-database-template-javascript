@@ -1,0 +1,34 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateWordMinuteTotals
+// Description: calculates the total number of words read
+// and the total number of minutes.
+
+function calculateWordMinuteTotals()
+{
+    var bs = document.getElementsByClassName('bookstatus');
+    var timespent = document.getElementsByClassName('timespent');
+    var wordcount = document.getElementsByClassName('bookwords');
+
+    var total_time = 0;
+    var total_words = 0;
+
+    // Count up totals
+    for (var i=0; i<bs.length; i++) {
+        if (bs[i].innerHTML == "Finished") {
+            total_time += parseInt(timespent[i].innerHTML);
+            timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
+            total_words += parseInt(wordcount[i].innerHTML);
+            wordcount[i].innerHTML = parseInt(wordcount[i].innerHTML).toLocaleString();
+        } else {
+            if (bs[i].innerHTML == "Still reading" || bs[i].innerHTML == "Gave up") {
+                total_time += parseInt(timespent[i].innerHTML);
+                timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
+                wordcount[i].innerHTML = ''; // Null out words for unfinished books
+            }
+
+        }
+
+    }
+    document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
+    document.getElementById('totalwordcount').innerHTML = total_words.toLocaleString();
+}
