@@ -15,6 +15,8 @@ function calculateCRGoalHitMinuteTotals()
     if (dg == 0) {
         dg = 50; // Default for WordEngine
     }
+    document.getElementById('crgoal').innerHTML = 'Goal (' + dg + ')';
+
 
     // Grab all time spent, daily CR and all goal status
     var ts = document.getElementsByClassName('timespent');
@@ -42,5 +44,5 @@ function calculateCRGoalHitMinuteTotals()
 
     document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
     document.getElementById('totalcorrectresponses').innerHTML = total_CR.toLocaleString();
-    document.getElementById('totalgoalhits').innerHTML = total_goalhits.toLocaleString();
+    document.getElementById('totalgoalhits').innerHTML = total_goalhits.toLocaleString() + ' hits';
 }
