@@ -23,5 +23,5 @@ function calculateCRGoalHitMinuteTotals()
     } 
 
     document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
-    document.getElementById('totalcorrectresponses').innerHTML = total_words.toLocaleString();
+    document.getElementById('totalcorrectresponses').innerHTML = total_CR.toLocaleString();
 }
