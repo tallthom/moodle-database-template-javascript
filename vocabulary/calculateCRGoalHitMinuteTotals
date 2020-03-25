@@ -16,10 +16,12 @@ function calculateCRGoalHitMinuteTotals()
 
     // Count up totals
     for (var i=0; i<timespent.length; i++) {
-        total_time += parseInt(timespent[i].innerHTML);
-        timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
-        total_CR += parseInt(correctresponses[i].innerHTML);
-        correctresponses[i].innerHTML = parseInt(correctresponses[i].innerHTML).toLocaleString();
+        if (timespent[i].innerHTML != "Minutes") {
+            total_time += parseInt(timespent[i].innerHTML);
+            timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
+            total_CR += parseInt(correctresponses[i].innerHTML);
+            correctresponses[i].innerHTML = parseInt(correctresponses[i].innerHTML).toLocaleString();
+        }
     } 
 
     document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
