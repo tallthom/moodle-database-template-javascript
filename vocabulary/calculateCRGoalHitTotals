@@ -1,0 +1,27 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateCRGoalHitTotals
+// Description: calculates the total number of minutes spent studying,
+// the total number of CR and the total number of goal hits
+// and the total number of minutes.
+
+function calculateCRGoalHitMinuteTotals()
+{
+    var timespent = document.getElementsByClassName('timespent');
+    var correctresponses = document.getElementsByClassName('correctresponses');
+    var goalhits = document.getElementsByClassName('goalhits');
+
+    var total_time = 0;
+    var total_CR = 0;
+    var total_goalhits = 0;
+
+    // Count up totals
+    for (var i=0; i<timespent.length; i++) {
+        total_time += parseInt(timespent[i].innerHTML);
+        timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
+        total_CR += parseInt(correctresponses[i].innerHTML);
+        correctresponses[i].innerHTML = parseInt(correctresponses[i].innerHTML).toLocaleString();
+    } 
+
+    document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
+    document.getElementById('totalcorrectresponses').innerHTML = total_words.toLocaleString();
+}
