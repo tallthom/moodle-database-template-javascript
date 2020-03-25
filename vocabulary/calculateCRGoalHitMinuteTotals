@@ -1,5 +1,5 @@
 // Moodle Database Activity Javascript Template Function
-// Name: calculateCRGoalHitTotals
+// Name: calculateCRGoalHitMinuteTotals
 // Description: calculates the total number of minutes spent studying,
 // the total number of CR and the total number of goal hits
 // and the total number of minutes.
