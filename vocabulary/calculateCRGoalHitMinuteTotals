@@ -6,10 +6,6 @@
 
 function calculateCRGoalHitMinuteTotals()
 {
-    var total_time = 0;
-    var total_CR = 0;
-    var total_goalhits = 0;
-
     // The daily goals are stored in the template (or default to 50)
     var dg = parseInt(document.getElementById('crgoal').innerHTML);
     if (dg == 0) {
@@ -17,30 +13,31 @@ function calculateCRGoalHitMinuteTotals()
     }
     document.getElementById('crgoal').innerHTML = 'Goal (' + dg + ')';
 
-
     // Grab all time spent, daily CR and all goal status
     var ts = document.getElementsByClassName('timespent');
     var cr = document.getElementsByClassName('correctresponses');
     var gs = document.getElementsByClassName('goalhits');
 
-    // Loop through and check daily CR goal
-    for (var i = 0; i < cr.length; i++) {
+    var total_goalhits = 0;
+    var total_time = 0;
+    var total_CR = 0;
+
+    // Loop through and check daily CR goal, then count up the totals
+    for (var i=0; i < cr.length; i++) {
         the_cr = parseInt(cr[i].innerHTML);
         if (the_cr>=dg) {
             gs[i].innerHTML = 'Daily (+' + parseInt(the_cr-dg) + ')';
             total_goalhits += 1; // Add to the goal hits
         }
-    }
 
-    // Count up totals
-    for (var i=0; i<ts.length; i++) {
-        if (ts[i].innerHTML != 'Minutes') {
+        if (ts[i].innerHTML != 'Minutes' && ts[i].innerHTML != '<br>') {
             total_time += parseInt(ts[i].innerHTML);
             ts[i].innerHTML = parseInt(ts[i].innerHTML).toLocaleString();
             total_CR += parseInt(cr[i].innerHTML);
             cr[i].innerHTML = parseInt(cr[i].innerHTML).toLocaleString();
         }
-    } 
+ 
+    }
 
     document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
     document.getElementById('totalcorrectresponses').innerHTML = total_CR.toLocaleString();

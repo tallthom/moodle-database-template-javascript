@@ -4,22 +4,22 @@
 
 function calculateDayTotals()
 {
-    var dateread = document.getElementsByClassName('dateread');
+    var datereported = document.getElementsByClassName('datereported');
     var timeadded = document.getElementsByClassName('timeadded');
     var timemodified = document.getElementsByClassName('timemodified');
 
     // Determine the number of unique days.
-    var unique_datesread = new Set;
+    var unique_datesreported = new Set;
     var unique_timesadded = new Set;
     var unique_timesmodified = new Set;
 
     // Make unique sets of dates
 
-    for (var i=0; i<dateread.length; i++) {
-        if (dateread[i].innerHTML != 'Reported' && dateread[i].innerHTML != '') {
-           unique_datesread.add(dateread[i].innerHTML);
+    for (var i=0; i<datereported.length; i++) {
+        if (datereported[i].innerHTML != 'Reported' && datereported[i].innerHTML != '') {
+           unique_datesreported.add(datereported[i].innerHTML);
         }
     }
 
-    document.getElementById('totaldateread').innerHTML = unique_datesread.size + ' day' + ((unique_datesread.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totaldatereported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
 }

@@ -29,6 +29,8 @@ function calculateWordMinuteTotals()
         }
 
     }
+
     document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
     document.getElementById('totalwordcount').innerHTML = total_words.toLocaleString();
+    
 }
