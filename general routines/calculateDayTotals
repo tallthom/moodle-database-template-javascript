@@ -21,5 +21,5 @@ function calculateDayTotals()
         }
     }
 
-    document.getElementById('totaldatereported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totaldatesreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
 }
