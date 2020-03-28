@@ -26,7 +26,7 @@ function calculateCRGoalHitMinuteTotals()
     for (var i=0; i < cr.length; i++) {
         the_cr = parseInt(cr[i].innerHTML);
         if (the_cr>=dg) {
-            gs[i].innerHTML = 'Daily (+' + parseInt(the_cr-dg) + ')';
+            gs[i].innerHTML = '+' + parseInt(the_cr-dg) + ' hit';
             total_goalhits += 1; // Add to the goal hits
         }
 
