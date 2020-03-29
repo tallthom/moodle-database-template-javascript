@@ -1,0 +1,36 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateEnglishCentralStudyTotals
+// Description: Reviews the logs and calculates totals 
+
+function calculateEnglishCentralStudyTotals() {
+
+     // Grab all time spent, daily CR and all goal status
+    var ts = document.getElementsByClassName('timespent');
+    var vw = document.getElementsByClassName('videoswatched');
+    var pc = document.getElementsByClassName('percentcompleted');
+
+    var total_time = 0;
+    var total_videoswatched = 0;
+    var total_percentcompleted = 0;
+
+    // Loop through and check daily CR goal, then count up the totals
+    for (var i=0; i < ts.length; i++) {
+        if (ts[i].innerHTML != 'Minutes' && ts[i].innerHTML != '<br>') {
+            total_time += parseInt(ts[i].innerHTML);
+            ts[i].innerHTML = parseInt(ts[i].innerHTML).toLocaleString();
+            total_videoswatched += parseInt(vw[i].innerHTML);
+            vw[i].innerHTML = parseInt(vw[i].innerHTML).toLocaleString();
+
+            // Take the highest percentage
+            if (parseInt(pc[i].innerHTML) > total_percentcompleted) {
+               total_percentcompleted = parseInt(pc[i].innerHTML);
+            }
+            pc[i].innerHTML = parseInt(pc[i].innerHTML).toLocaleString() + '%';
+        }
+ 
+    }
+
+    document.getElementById('totaltimespent').innerHTML = total_time.toLocaleString();
+    document.getElementById('totalvideoswatched').innerHTML = total_videoswatched.toLocaleString();
+    document.getElementById('totalpercentcompleted').innerHTML = total_percentcompleted.toLocaleString() + '%';
+}
