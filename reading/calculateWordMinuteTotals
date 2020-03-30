@@ -6,8 +6,8 @@
 function calculateWordMinuteTotals()
 {
     var bs = document.getElementsByClassName('bookstatus');
-    var timespent = document.getElementsByClassName('timespent');
-    var wordcount = document.getElementsByClassName('bookwords');
+    var ts = document.getElementsByClassName('timespent');
+    var wc = document.getElementsByClassName('bookwords');
 
     var total_time = 0;
     var total_words = 0;
@@ -15,15 +15,15 @@ function calculateWordMinuteTotals()
     // Count up totals
     for (var i=0; i<bs.length; i++) {
         if (bs[i].innerHTML == "Finished") {
-            total_time += parseInt(timespent[i].innerHTML);
-            timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
-            total_words += parseInt(wordcount[i].innerHTML);
-            wordcount[i].innerHTML = parseInt(wordcount[i].innerHTML).toLocaleString();
+            total_time += parseInt(ts[i].innerHTML);
+            ts[i].innerHTML = parseInt(ts[i].innerHTML).toLocaleString();
+            total_words += parseInt(wc[i].innerHTML);
+            wc[i].innerHTML = parseInt(wc[i].innerHTML).toLocaleString();
         } else {
             if (bs[i].innerHTML == "Still reading" || bs[i].innerHTML == "Gave up") {
-                total_time += parseInt(timespent[i].innerHTML);
-                timespent[i].innerHTML = parseInt(timespent[i].innerHTML).toLocaleString();
-                wordcount[i].innerHTML = ''; // Null out words for unfinished books
+                total_time += parseInt(ts[i].innerHTML);
+                ts[i].innerHTML = parseInt(ts[i].innerHTML).toLocaleString();
+                wc[i].innerHTML = 0; // Null out words for unfinished books
             }
 
         }
