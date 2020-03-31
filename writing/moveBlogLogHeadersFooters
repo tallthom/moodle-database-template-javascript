@@ -1,0 +1,35 @@
+// Moodle Database Activity Javascript Template Function
+// Name: moveBlogLogHeadersFooters
+// Description: Divides the list report into "posts" and "comments"
+// sections with subtotals for each section. The totaling is not
+// done in this function, only the moving of div sections.
+
+function moveBlogLogHeadersFooters() {
+    var users = document.getElementsByClassName('user')
+    var gi = document.getElementsByClassName('grid-item');
+    var bt = document.getElementsByClassName('blogtype');
+
+    // First find out if this is just a single user
+    var is_single_user = new Set;
+    for (var i=0; i<users.length; i++) {
+       is_single_user.add(users[i].childNodes[0].innerHTML);
+    }
+
+    // Move things only for single users
+    if (is_single_user.size == 1) {
+        var fc = 0;
+        for (var i=0; i<gi.length; i++) {
+            if (fc == 0) {
+                if (bt[i].innerHTML == 'Comment' ) {
+                    fc = 1;
+                    gi[i].innerHTML = document.getElementById('posttotals').innerHTML + document.getElementById('pcheader').innerHTML;
+                    document.getElementById('posttotals').innerHTML = '';
+                }
+            }
+        }
+        // There are no comments, so fill in at the end.
+        if (fc == 0) {
+           document.getElementById('posttotals').innerHTML = document.getElementById('posttotals').innerHTML + document.getElementById('pcheader').innerHTML;
+        }
+    }
+}

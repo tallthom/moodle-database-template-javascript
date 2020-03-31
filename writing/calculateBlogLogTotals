@@ -1,0 +1,53 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateBlogLogTotals
+// Description: Parses blog log entries and calculates:
+// -- Unique dates reported (both posts and comments)
+// -- Total time spent blogging (both posts and comments)
+// -- Total words written (both posts and comments)
+
+function calculateBlogLogTotals()
+{
+    var dr = document.getElementsByClassName('datereported');
+    var bt = document.getElementsByClassName('blogtype');
+    var ts = document.getElementsByClassName('timespent');
+    var wc = document.getElementsByClassName('wordcount');
+
+    // Determine the number of unique days.
+    var unique_post_dr = new Set;
+    var unique_comment_dr = new Set;
+
+    // Determine the number of minutes
+    var post_ts = 0;
+    var comment_ts = 0;
+    // Determine the number of words
+    var post_wc = 0;
+    var comment_wc = 0;
+
+    // Make unique sets of dates
+    for (var i=0; i<dr.length; i++) {
+        // Parsing posts
+        if (bt[i].innerHTML == 'Post') {
+           unique_post_dr.add(dr[i].innerHTML);
+           post_ts += parseInt(ts[i].innerHTML);
+           ts[i].innerHTML = parseInt(ts[i].innerHTML).toLocaleString();
+           post_wc += parseInt(wc[i].innerHTML);
+           wc[i].innerHTML = parseInt(wc[i].innerHTML).toLocaleString();
+        }
+
+        // Parsing comments
+        if (bt[i].innerHTML == 'Comment') {
+           unique_comment_dr.add(dr[i].innerHTML);
+           comment_ts += parseInt(ts[i].innerHTML);
+           ts[i].innerHTML = parseInt(ts[i].innerHTML).toLocaleString();
+           comment_wc += parseInt(wc[i].innerHTML);
+           wc[i].innerHTML = parseInt(wc[i].innerHTML).toLocaleString();
+        }
+    }
+
+    document.getElementById('totaldatesreported-posts').innerHTML = unique_post_dr.size + ' day' + ((unique_post_dr.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totaltimespent-posts').innerHTML = post_ts.toLocaleString();
+    document.getElementById('totalwordcount-posts').innerHTML = post_wc.toLocaleString();
+    document.getElementById('totaldatesreported-comments').innerHTML = unique_comment_dr.size + ' day' + ((unique_comment_dr.size != 1) ? 's' : '') + ' reported';
+    document.getElementById('totaltimespent-comments').innerHTML = comment_ts.toLocaleString();
+    document.getElementById('totalwordcount-comments').innerHTML = comment_wc.toLocaleString();
+}
