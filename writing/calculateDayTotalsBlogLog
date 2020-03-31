@@ -1,0 +1,25 @@
+// Moodle Database Activity Javascript Template Function
+// Name: calculateDayTotals
+// Description: number of days logged and reported
+
+function calculateDayTotals()
+{
+    var datereported = document.getElementsByClassName('datereported');
+    var timeadded = document.getElementsByClassName('timeadded');
+    var timemodified = document.getElementsByClassName('timemodified');
+
+    // Determine the number of unique days.
+    var unique_datesreported = new Set;
+    var unique_timesadded = new Set;
+    var unique_timesmodified = new Set;
+
+    // Make unique sets of dates
+
+    for (var i=0; i<datereported.length; i++) {
+        if (datereported[i].innerHTML != 'Reported' && datereported[i].innerHTML != '') {
+           unique_datesreported.add(datereported[i].innerHTML);
+        }
+    }
+
+    document.getElementById('totaldatesreported').innerHTML = unique_datesreported.size + ' day' + ((unique_datesreported.size != 1) ? 's' : '') + ' reported';
+}

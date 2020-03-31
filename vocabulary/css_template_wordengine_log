@@ -1,0 +1,198 @@
+@page {
+    size: landscape;
+}
+
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    justify-content: space-evenly;  
+    padding: 0.5px;
+}
+
+.user, .user-header, .user-footer {
+    grid-area: user;
+    text-align: left;
+    display: none;
+}
+
+.timeadded, .timeadded-header, .timeadded-footer {
+    grid-area: timeadded;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.timemodified, .timemodified-header, .timemodified-footer {
+    grid-area: timemodified;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.datereported, .datereported-header, .datereported-footer {
+    grid-area: datereported;
+    text-align: left;
+}
+
+.devicetype, .devicetype-header, devicetype-footer {
+    grid-area: devicetype;
+    text-align: left;
+}
+
+.comments, .comments-header, .comments-footer {
+    grid-area: comments;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.timespent, .timespent-header, .timespent-footer {
+    grid-area: timespent;
+    text-align: right;
+}
+
+.correctresponses, .correctresponses-header, .correctresponses-footer {
+    grid-area: correctresponses;
+    text-align: right;
+}
+
+.goalhits, .goalhits-header, .goalhits-footer {
+    grid-area: goalhits;
+    text-align: right;
+}
+
+.more {
+    grid-area: more;
+    text-align: right;
+}
+
+.edit {
+    grid-area: edit;
+    text-align: right;
+}
+
+.delete {
+    grid-area: delete;
+    text-align: right;
+}
+
+.delcheck {
+    grid-area: delcheck;
+    text-align: right;
+}
+
+.timespent-header::after {
+    content: "Minutes";
+}
+
+.correctresponses-header::after {
+       content: "CRs";
+}
+
+
+/* WIDESCREEN */
+@media only screen and (min-width: 1440px) {
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    "timeadded timemodified datereported devicetype comments timespent correctresponses goalhits more edit delete delcheck";
+    grid-template-columns: 18rem 18rem 9rem 4rem 2fr 4rem 4rem 6rem 1rem 1rem 1rem 1rem;
+    grid-gap: 3px;
+    padding: 1px;
+}
+
+.pledge {
+    display: none;
+}
+
+} /* END WIDESCREEN */
+
+/* 1440 PIXEL MAX */
+@media only screen and (max-width: 1440px) and (min-width: 1200px) {
+.grid-container {
+display: grid;
+    grid-template-areas:
+    "timeadded datereported devicetype comments timespent correctresponses goalhits more edit delete delcheck";
+    grid-template-columns: 18rem 9rem 4rem 2fr 4rem 4rem 6rem 1rem 1rem 1rem 1rem;
+    grid-gap: 3px;
+    padding: 1px;
+}
+
+.timemodified, .timemodified-header, .timemodified-footer, .pledge {
+    display: none;
+}
+
+} /* END 1440 PIXEL MAX */
+
+/* 1200 PIXEL MAX */
+@media only screen and (max-width: 1200px) and (min-width: 900px) {
+.grid-container {
+display: grid;
+    grid-template-areas:
+    "datereported devicetype comments timespent correctresponses goalhits more edit delete delcheck";
+    grid-template-columns: 9rem 4rem 2fr 4rem 4rem 6rem 1rem 1rem 1rem 1rem;
+    grid-gap: 3px;
+    padding: 1px;
+}
+
+.timeadded, .timeadded-header, .timeadded-footer, .timemodified, .timemodified-header, .timemodified-footer, .pledge {
+    display: none;
+}
+
+} /* END 1200 PIXEL MAX */
+
+/* 900 PIXEL MAX (iPad and Mobile) */
+@media only screen and (max-width: 900px) and (min-width: 0px) {
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    "datereported datereported datereported"
+    "timespent correctresponses goalhits"   
+    "devicetype comments comments" 
+    "timeadded timeadded timeadded"
+    "timemodified timemodified timemodified"
+    "more edit delete";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1px;
+    background-color: #EBC8D4;
+    padding: 1px;
+    margin-bottom: 1rem;
+}
+
+.grid-header, .grid-footer, .pledge, .delcheck, .printall-listview-entries {
+    display: none;
+}
+
+.timeadded, .timemodified, .datereported, .devicetype, .comments, .timespent, .correctresponses, .goalhits, .more, .edit, .delete {
+    text-align: center;
+    font-size: large;
+    white-space: unset;
+    overflow: unset;
+    display: unset;
+}
+
+.timespent::after {
+    content: " Minutes";
+}
+
+.correctresponses::after {
+    content: " CRs";
+}
+
+}  /* END 900 PIXEL MAX */
+
+/* PRINTING SETUP */
+@media print  {
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    "timeadded datereported devicetype comments timespent correctresponses goalhits";
+    grid-template-columns: 18rem 9rem 4rem 2fr 4rem 4rem 6rem;
+    grid-gap: 3px;
+    padding: 1px;
+}
+
+.timemodified, .timemodified-header, .timemodified-footer, .more, .edit, .delete, .delcheck {
+    display: none;
+}
+
+} /* END PRINTING SETUP */

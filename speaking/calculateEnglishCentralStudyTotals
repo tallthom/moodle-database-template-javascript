@@ -25,7 +25,6 @@ function calculateEnglishCentralStudyTotals() {
             if (parseInt(pc[i].innerHTML) > total_percentcompleted) {
                total_percentcompleted = parseInt(pc[i].innerHTML);
             }
-            pc[i].innerHTML = parseInt(pc[i].innerHTML).toLocaleString() + '%';
         }
  
     }
