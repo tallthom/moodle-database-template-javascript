@@ -8,12 +8,13 @@ function assignmentNameReportSingle() {
     var the_assignment = document.title;
 
     // Strip of the preceding course name
+    the_assignment = the_assignment.substring(the_assignment.indexOf(' | ')+4);
     the_assignment = the_assignment.substring(0, the_assignment.indexOf(' | '));
     var single_user = '';
     var single_user_name ='';
 
     // Grab all usernames from the page.
-    var users = document.getElementsByClassName('theUser');
+    var users = document.getElementsByClassName('user');
 
     // Find out if this is all one user or if it is many users
     var is_same = true;
