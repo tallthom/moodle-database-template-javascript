@@ -6,8 +6,8 @@ function assignmentNameReportList() {
     // Grab the assignment name from the document
     var the_assignment = document.title;
 
-    // Strip of the preceding course name
-    the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
+    // Strip off the preceding course name
+    the_assignment = the_assignment.substring(0, the_assignment.indexOf(' | '));
     var single_user = '';
     var single_user_name ='';
 

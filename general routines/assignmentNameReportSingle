@@ -8,7 +8,7 @@ function assignmentNameReportSingle() {
     var the_assignment = document.title;
 
     // Strip of the preceding course name
-    the_assignment = the_assignment.substring(the_assignment.indexOf(':') + 1);
+    the_assignment = the_assignment.substring(0, the_assignment.indexOf(' | '));
     var single_user = '';
     var single_user_name ='';
 

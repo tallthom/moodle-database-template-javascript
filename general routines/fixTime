@@ -1,0 +1,19 @@
+// Moodle Database Activity Javascript Template Function
+// Name: fixTime
+// Description: in Moodle 4.3, timeadded and timemodified no longer show the time.
+//              However, the timeadded/modified is available in an HTML tag, so
+//              this function gets it and displays it properly. This is a temporary
+//              fix, so this function could go away at some point.
+
+function fixTime()
+{
+    var timeadded = document.getElementsByClassName('timeadded');
+    var timemodified = document.getElementsByClassName('timemodified');
+
+    // Make unique sets of dates
+
+    for (var i=0; i<timeadded.length; i++) {
+        timeadded[i].firstElementChild.innerHTML = timeadded[i].firstElementChild.title;
+        timemodified[i].firstElementChild.innerHTML = timemodified[i].firstElementChild.title;
+    }
+}
